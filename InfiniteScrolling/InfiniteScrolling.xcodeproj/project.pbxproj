@@ -24,6 +24,10 @@
 		63C268DF26F9EE0D00B826E7 /* UITableView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C268D826F9EE0D00B826E7 /* UITableView+Reusable.swift */; };
 		63C268E026F9EE0D00B826E7 /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C268D926F9EE0D00B826E7 /* NibLoadable.swift */; };
 		63C268E126F9EE0D00B826E7 /* NibOwnerLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C268DA26F9EE0D00B826E7 /* NibOwnerLoadable.swift */; };
+		63C268EA26F9FCB200B826E7 /* TopCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C268E826F9FCB200B826E7 /* TopCollectionViewCell.swift */; };
+		63C268EB26F9FCB200B826E7 /* TopCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63C268E926F9FCB200B826E7 /* TopCollectionViewCell.xib */; };
+		63C268EF26F9FCCC00B826E7 /* BottomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C268ED26F9FCCC00B826E7 /* BottomCollectionViewCell.swift */; };
+		63C268F026F9FCCC00B826E7 /* BottomCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63C268EE26F9FCCC00B826E7 /* BottomCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +50,10 @@
 		63C268D826F9EE0D00B826E7 /* UITableView+Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Reusable.swift"; sourceTree = "<group>"; };
 		63C268D926F9EE0D00B826E7 /* NibLoadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
 		63C268DA26F9EE0D00B826E7 /* NibOwnerLoadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibOwnerLoadable.swift; sourceTree = "<group>"; };
+		63C268E826F9FCB200B826E7 /* TopCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCollectionViewCell.swift; sourceTree = "<group>"; };
+		63C268E926F9FCB200B826E7 /* TopCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopCollectionViewCell.xib; sourceTree = "<group>"; };
+		63C268ED26F9FCCC00B826E7 /* BottomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCollectionViewCell.swift; sourceTree = "<group>"; };
+		63C268EE26F9FCCC00B826E7 /* BottomCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +168,10 @@
 		63C268E626F9F3BD00B826E7 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				63C268E826F9FCB200B826E7 /* TopCollectionViewCell.swift */,
+				63C268E926F9FCB200B826E7 /* TopCollectionViewCell.xib */,
+				63C268ED26F9FCCC00B826E7 /* BottomCollectionViewCell.swift */,
+				63C268EE26F9FCCC00B826E7 /* BottomCollectionViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -221,7 +233,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63C268EB26F9FCB200B826E7 /* TopCollectionViewCell.xib in Resources */,
 				63C268A626F9DDB600B826E7 /* LaunchScreen.storyboard in Resources */,
+				63C268F026F9FCCC00B826E7 /* BottomCollectionViewCell.xib in Resources */,
 				63C268A326F9DDB600B826E7 /* Assets.xcassets in Resources */,
 				63C268C426F9E12500B826E7 /* MainScreenViewController.storyboard in Resources */,
 			);
@@ -239,6 +253,7 @@
 				63C268DF26F9EE0D00B826E7 /* UITableView+Reusable.swift in Sources */,
 				63C268E126F9EE0D00B826E7 /* NibOwnerLoadable.swift in Sources */,
 				63C268DD26F9EE0D00B826E7 /* UICollectionView+Reusable.swift in Sources */,
+				63C268EF26F9FCCC00B826E7 /* BottomCollectionViewCell.swift in Sources */,
 				63C268DB26F9EE0D00B826E7 /* StoryboardSceneBased.swift in Sources */,
 				63C268C326F9E12500B826E7 /* MainScreenDataSource.swift in Sources */,
 				63C2689A26F9DDB400B826E7 /* AppDelegate.swift in Sources */,
@@ -246,6 +261,7 @@
 				63C268E026F9EE0D00B826E7 /* NibLoadable.swift in Sources */,
 				63C268C826F9E12500B826E7 /* MainScreenViewModel.swift in Sources */,
 				63C268C526F9E12500B826E7 /* MainScreenModels.swift in Sources */,
+				63C268EA26F9FCB200B826E7 /* TopCollectionViewCell.swift in Sources */,
 				63C268DC26F9EE0D00B826E7 /* StoryboardBased.swift in Sources */,
 				63C268C626F9E12500B826E7 /* MainScreenViewController.swift in Sources */,
 			);
