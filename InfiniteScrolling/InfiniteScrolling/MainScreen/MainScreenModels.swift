@@ -40,13 +40,13 @@ extension MainScreen.Models {
 }
 
 // MARK: - Scene Models
-//extension MainScreen.Models {
-//
-//    // MARK: List Models
-//    enum Section: Hashable {
-//        case main
-//    }
-//
-//    enum Item: Hashable {
-//    }
-//}
+extension MainScreen.Models {
+
+    // MARK: List Models
+    enum Section: Hashable {
+        case main
+    }
+
+    enum Item: Hashable {
+    }
+}
