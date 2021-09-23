@@ -9,7 +9,11 @@ import UIKit
 import Reusable
 
 final class BottomCollectionViewCell: UICollectionViewCell, NibReusable {
-
+  
+  
+  @IBOutlet private weak var bottomCellImageView: UIImageView!
+  @IBOutlet private weak var viewForTitleView: UIView!
+  
     struct State {
         
     }

@@ -11,9 +11,9 @@ import Reusable
 final class TitleView: XibView {
   
   
-  @IBOutlet weak var titleLabel: UILabel!
-  @IBOutlet weak var sourceLabel: UILabel!
-  @IBOutlet weak var dateLabel: UILabel!
+  @IBOutlet private weak var titleLabel: UILabel!
+  @IBOutlet private weak var sourceLabel: UILabel!
+  @IBOutlet private weak var dateLabel: UILabel!
   
     
     struct State {

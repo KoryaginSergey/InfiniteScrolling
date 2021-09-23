@@ -9,6 +9,12 @@ import UIKit
 import Reusable
 
 final class TopCollectionViewCell: UICollectionViewCell, NibReusable {
+  
+  
+  @IBOutlet private weak var topCellView: UIView!
+  @IBOutlet private weak var topCellImageView: UIImageView!
+  @IBOutlet private weak var viewForTitleView: UIView!
+  
 
     struct State {
         

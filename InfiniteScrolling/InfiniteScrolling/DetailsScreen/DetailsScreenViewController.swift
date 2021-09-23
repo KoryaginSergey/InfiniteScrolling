@@ -10,6 +10,12 @@ import UIKit
 import Combine
 
 final class DetailsScreenViewController: UIViewController, StoryboardBased {
+  
+  
+  @IBOutlet private weak var detailsImageView: UIImageView!
+  @IBOutlet private weak var viewForTitleView: UIView!
+  @IBOutlet private weak var textView: UITextView!
+  
 
     // MARK: - Properties
     private var viewModel: DetailsScreenViewModelProtocol?
