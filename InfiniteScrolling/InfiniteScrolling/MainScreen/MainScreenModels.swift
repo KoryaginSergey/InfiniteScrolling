@@ -27,7 +27,7 @@ extension MainScreen.Models {
     enum ViewState: Equatable {
         case idle
         case loading
-        case loaded
+        case loaded(items: [MainScreen.Models.Item])
         case empty
         case failure
     }
@@ -36,6 +36,7 @@ extension MainScreen.Models {
     }
 
     enum ViewRoute {
+      case dismiss
     }
 }
 
@@ -48,5 +49,7 @@ extension MainScreen.Models {
     }
 
     enum Item: Hashable {
+      case topItem(state: TopCollectionViewCell.State)
+      case bottomItem(state: BottomCollectionViewCell.State)
     }
 }

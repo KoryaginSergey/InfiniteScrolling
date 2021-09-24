@@ -22,21 +22,36 @@ class NetworkManager {
   
   // MARK: - Universal decodable function
   
-      func decodeJson<T:Decodable>(type: T.Type, from: Data?) -> T? {
-          let decoder = JSONDecoder()
-          guard let data = from else { return nil }
-          do {
-              let objects = try decoder.decode(type.self, from: data)
-              return objects
-          } catch let error {
-              print("data has been not decoded : \(error.localizedDescription)")
-              return nil
-          }
+  func decodeJson<T:Decodable>(type: T.Type, from: Data?) -> T? {
+      let decoder = JSONDecoder()
+      guard let data = from else { return nil }
+      do {
+          let objects = try decoder.decode(type.self, from: data)
+          return objects
+      } catch let error {
+          print("data has been not decoded : \(error.localizedDescription)")
+          return nil
       }
+  }
   
-  
-  
-  
+//  func getListOfCities(by cityName: String, result: @escaping (([CityModel]?)->())) -> URLSessionDataTask? {
+//      guard let url = URL(string: WeatherURL.direct(name: cityName).url) else {
+//          result(nil)
+//          return nil
+//      }
+//      let task = URLSession.shared.dataTask(with: url) { (data, responce, error) in
+//          DispatchQueue.main.async {
+//              guard  error == nil else {
+//                  print("error: ",error?.localizedDescription as Any)
+//                  return
+//              }
+//              result(self.decodejson(type: [CityModel].self , from: data))
+//          }
+//      }
+//      task.resume()
+//      return task
+//  }
+//  
   
   
   

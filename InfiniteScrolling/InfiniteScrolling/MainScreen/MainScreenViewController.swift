@@ -13,7 +13,8 @@ final class MainScreenViewController: UIViewController, StoryboardBased {
 
     // MARK: - Properties
     @IBOutlet private weak var collectionView: UICollectionView!
-
+    @IBOutlet private weak var titleLabel: UILabel!
+  
     private lazy var dataSource = MainScreenDataSource(collectionView: collectionView)
     private var viewModel: MainScreenViewModelProtocol?
     private let onLoad = PassthroughSubject<Void, Never>()
@@ -72,8 +73,10 @@ private extension MainScreenViewController {
             updateSnapshot([], animated: false)
         case .loading:
             startLoading()
-        case .loaded:
-            stopLoading()
+        case .loaded(items: let item):
+          self.updateSnapshot(item)
+          collectionView.reloadData()
+//            stopLoading()
         case .empty:
             stopLoading()
         case .failure:
@@ -91,6 +94,9 @@ private extension MainScreenViewController {
     
     func handleRoute(_ route: MainScreen.Models.ViewRoute) {
         switch route {
+        case .dismiss:
+          break
+//          dismiss(animated: true, completion: nil)
         }
     }
 }

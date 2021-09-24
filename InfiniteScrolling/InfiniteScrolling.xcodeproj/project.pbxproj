@@ -15,6 +15,7 @@
 		6336152026FC76E1006B3688 /* DetailsScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6336151B26FC76E1006B3688 /* DetailsScreenAssembly.swift */; };
 		6336152126FC76E1006B3688 /* DetailsScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6336151C26FC76E1006B3688 /* DetailsScreenViewModel.swift */; };
 		6336152626FCA47D006B3688 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6336152526FCA47D006B3688 /* NetworkManager.swift */; };
+		6336152C26FDB0F2006B3688 /* ModelArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6336152B26FDB0F2006B3688 /* ModelArticle.swift */; };
 		63C2689A26F9DDB400B826E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C2689926F9DDB400B826E7 /* AppDelegate.swift */; };
 		63C2689C26F9DDB400B826E7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C2689B26F9DDB400B826E7 /* SceneDelegate.swift */; };
 		63C268A326F9DDB600B826E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63C268A226F9DDB600B826E7 /* Assets.xcassets */; };
@@ -47,6 +48,7 @@
 		6336151B26FC76E1006B3688 /* DetailsScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsScreenAssembly.swift; sourceTree = "<group>"; };
 		6336151C26FC76E1006B3688 /* DetailsScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsScreenViewModel.swift; sourceTree = "<group>"; };
 		6336152526FCA47D006B3688 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		6336152B26FDB0F2006B3688 /* ModelArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelArticle.swift; sourceTree = "<group>"; };
 		63C2689626F9DDB400B826E7 /* InfiniteScrolling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InfiniteScrolling.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63C2689926F9DDB400B826E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63C2689B26F9DDB400B826E7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				6336152526FCA47D006B3688 /* NetworkManager.swift */,
+				6336152B26FDB0F2006B3688 /* ModelArticle.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				63C268DE26F9EE0D00B826E7 /* Reusable.swift in Sources */,
 				63C268C726F9E12500B826E7 /* MainScreenAssembly.swift in Sources */,
 				63C268DF26F9EE0D00B826E7 /* UITableView+Reusable.swift in Sources */,
+				6336152C26FDB0F2006B3688 /* ModelArticle.swift in Sources */,
 				63C268E126F9EE0D00B826E7 /* NibOwnerLoadable.swift in Sources */,
 				6336152626FCA47D006B3688 /* NetworkManager.swift in Sources */,
 				6336151E26FC76E1006B3688 /* DetailsScreenModels.swift in Sources */,

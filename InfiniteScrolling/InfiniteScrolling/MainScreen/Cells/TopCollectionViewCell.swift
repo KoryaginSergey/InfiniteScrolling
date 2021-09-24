@@ -6,64 +6,93 @@
 //
 
 import UIKit
-import Reusable
+
 
 final class TopCollectionViewCell: UICollectionViewCell, NibReusable {
   
+  private struct Defaults {
+    struct TopView {
+      static let cornerRadius: CGFloat = 15
+    }
+    
+    struct TitleView {
+      
+    }
+  }
   
   @IBOutlet private weak var topCellView: UIView!
   @IBOutlet private weak var topCellImageView: UIImageView!
   @IBOutlet private weak var viewForTitleView: UIView!
   
-
-    struct State {
-        
+  
+  private var titleView: TitleView?
+  
+  struct State {
+    let id = UUID().hashValue
+    let titleViewState: TitleView.State
+    let image: UIImage?
+  }
+  
+  // MARK: - Properties
+  var state: State? {
+    didSet {
+      configure()
     }
-    
-    // MARK: - Properties
-    var state: State? {
-        didSet {
-            configure()
-        }
-    }
-    
-    // MARK: - Lifecycle
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        setupUI()
-    }
- 
-    /*
-    override func layoutSubviews() {
-        super.layoutSubviews()
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-    }
-     */
+  }
+  
+  // MARK: - Lifecycle
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    setupUI()
+  }
+  
+  /*
+   override func layoutSubviews() {
+   super.layoutSubviews()
+   }
+   
+   override func prepareForReuse() {
+   super.prepareForReuse()
+   }
+   */
 }
 
 // MARK: - Internal methods
 extension TopCollectionViewCell {
-    
+  
 }
 
 // MARK: - Private methods
 private extension TopCollectionViewCell {
+  
+  func setupUI() {
+    topCellView.layer.cornerRadius = Defaults.TopView.cornerRadius
+    topCellImageView.contentMode = .scaleAspectFill
+    topCellView.clipsToBounds = true
     
-    func setupUI() {
-        
-    }
+    let titleView = TitleView.loadFromNib()
+    viewForTitleView.addSubview(titleView)
+    titleView.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      titleView.topAnchor.constraint(equalTo: viewForTitleView.topAnchor),
+      titleView.bottomAnchor.constraint(equalTo: viewForTitleView.bottomAnchor),
+      titleView.leftAnchor.constraint(equalTo: viewForTitleView.leftAnchor),
+      titleView.rightAnchor.constraint(equalTo: viewForTitleView.rightAnchor)
+    ])
     
-    func configure() {
-        
-    }
+    self.titleView = titleView
+  }
+  
+  func configure() {
+    topCellImageView.image = state?.image
+    titleView?.state = state?.titleViewState
+//    state?.completionHandler()
+  }
 }
 
-/*
-// MARK: - TopCollectionViewCell.State + Hashable
+ // MARK: - TopCollectionViewCell.State + Hashable
 extension TopCollectionViewCell.State: Hashable {
-    
+  static func == (lhs: TopCollectionViewCell.State, rhs: TopCollectionViewCell.State) -> Bool {
+    return lhs.id == rhs.id && lhs.image == rhs.image && lhs.titleViewState == rhs.titleViewState
+  }
 }
- */

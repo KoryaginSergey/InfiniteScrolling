@@ -23,7 +23,7 @@ final class MainScreenDataSource {
         self.collectionView = collectionView
         collectionView.collectionViewLayout = makeLayout()
         collectionView.dataSource = dataSource
-        makeSupplementaryProvider()
+//        makeSupplementaryProvider()
         registerReusable(in: collectionView)
     }
 
@@ -40,7 +40,8 @@ final class MainScreenDataSource {
 private extension MainScreenDataSource {
 
     func registerReusable(in collectionView: UICollectionView) {
-//        collectionView.register(cellType: MyCollectionCell.self)
+      collectionView.register(cellType: TopCollectionViewCell.self)
+      collectionView.register(cellType: BottomCollectionViewCell.self)
 //        collectionView.register(supplementaryViewType: MySectionView.self, ofKind: MySectionView.reuseIdentifier)
     }
 }
@@ -49,33 +50,93 @@ private extension MainScreenDataSource {
 private extension MainScreenDataSource {
 
     func makeDataSource() -> DataSource {
-        DataSource(collectionView: collectionView) { collectionView, indexPath, item -> UICollectionViewCell? in
+         DataSource(collectionView: collectionView) { collectionView, indexPath, item -> UICollectionViewCell? in
             switch item {
+            case .topItem(state: let state):
+              let cell: TopCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+              cell.state = state
+              return cell
+            case .bottomItem(state: let state):
+              let cell: BottomCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+              cell.state = state
+              return cell
             }
         }
     }
 
-    func makeSupplementaryProvider() {
-        dataSource.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
-            return nil
-//            guard let self = self else { return  nil }
-//
-//            let section = self.dataSource.snapshot().sectionIdentifiers[indexPath.section]
-//            switch section {
-//
-//            }
-        }
-    }
+//    func makeSupplementaryProvider() {
+//        dataSource.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
+//            return nil
+////            guard let self = self else { return  nil }
+////
+////            let section = self.dataSource.snapshot().sectionIdentifiers[indexPath.section]
+////            switch section {
+////
+////            }
+//        }
+//    }
 }
 
 // MARK: - Layout
 private extension MainScreenDataSource {
 
-    func makeLayout() -> UICollectionViewCompositionalLayout {
+  func makeLayout() -> UICollectionViewCompositionalLayout {
         UICollectionViewCompositionalLayout { [weak self] index, _ -> NSCollectionLayoutSection? in
-            return nil
+//          return self?.firstLayoutSection()
+          return self?.secondLayoutSection()
         }
     }
+  
+  func makeLayout() -> NSCollectionLayoutSection? {
+      let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(400)))
+      let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(400)),
+                                                   subitems: [item])
+      let section = NSCollectionLayoutSection(group: group)
+
+      return section
+  }
+  
+  private func firstLayoutSection() -> NSCollectionLayoutSection {
+     let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+     let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets()
+     let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8), heightDimension: .absolute(400))
+     let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        group.contentInsets = .init(top: 0, leading: 10, bottom: 0, trailing: 2)
+     let section = NSCollectionLayoutSection(group: group)
+     section.orthogonalScrollingBehavior = .groupPaging
+
+     return section
+  }
+  
+  private func secondLayoutSection() -> NSCollectionLayoutSection? {
+    let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1.0))
+    let item = NSCollectionLayoutItem(layoutSize: itemSize)
+       item.contentInsets = NSDirectionalEdgeInsets()
+    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(150))
+    let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+       group.contentInsets = .init(top: 10, leading: 10, bottom: 10, trailing: 0)
+    let section = NSCollectionLayoutSection(group: group)
+    section.orthogonalScrollingBehavior = .groupPaging
+
+    return section
+  }
+  
+//  private func createLayout() -> UICollectionViewCompositionalLayout {
+//      let itemSize = NSCollectionLayoutSize(
+//        widthDimension: .fractionalWidth(1.0),
+//        heightDimension: .fractionalHeight(1.0))
+//      let item = NSCollectionLayoutItem(layoutSize: itemSize)
+//
+//      let groupSize = NSCollectionLayoutSize(
+//          widthDimension: .fractionalWidth(1.0),
+//        heightDimension: .absolute(collectionView.frame.size.height / 2))
+//      let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+//
+//      let section = NSCollectionLayoutSection(group: group)
+//      let layout = UICollectionViewCompositionalLayout(section: section)
+//      return layout
+//  }
 }
 
 // MARK: - DataSource class

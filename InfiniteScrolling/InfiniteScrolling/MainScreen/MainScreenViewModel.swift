@@ -38,16 +38,31 @@ extension MainScreenViewModel: MainScreenViewModelProtocol {
     var route: AnyPublisher<MainScreen.Models.ViewRoute, Never> { routeSubj.eraseToAnyPublisher() }
     
     func process(input: MainScreen.Models.ViewModelInput) {
-//        input.onLoad.sink { [weak self] _ in
-//            self?.fetch()
-//        }.store(in: &subscriptions)
+        input.onLoad.sink { [weak self] _ in
+            self?.fetch()
+        }.store(in: &subscriptions)
     }
 }
 
 // MARK: - Private
 private extension MainScreenViewModel {
-//    func fetch() {
-//        viewStateSubj.send(.loading)
+    func fetch() {
+        viewStateSubj.send(.loading)
+      
+//      viewStateSubj.send(.loaded(items: [
+//        .topItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil)),
+//        .topItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil)),
+//        .topItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil)),
+//        .topItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil))
+//      ]))
+      
+      viewStateSubj.send(.loaded(items: [
+        .bottomItem(state: .init(titleViewState: .init(title: "title", source: "source", date: "date"), image: nil)),
+        .bottomItem(state: .init(titleViewState: .init(title: "привет", source: "test", date: "test"), image: nil)),
+        .bottomItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil)),
+        .bottomItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil))
+      ]))
+      
 //        service.fetch.sink { [weak self] result in
 //            guard let self = self else { return }
 //            switch result {
@@ -59,5 +74,5 @@ private extension MainScreenViewModel {
 //                self.viewStateSubj.send(.failure(error)
 //            }
 //        }.store(in: &subscriptions)
-//    }
+    }
 }

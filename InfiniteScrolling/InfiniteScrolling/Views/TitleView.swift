@@ -6,9 +6,9 @@
 //
 
 import UIKit
-import Reusable
+//import Reusable
 
-final class TitleView: XibView {
+final class TitleView: UIView, NibLoadable {
   
   
   @IBOutlet private weak var titleLabel: UILabel!
@@ -16,8 +16,16 @@ final class TitleView: XibView {
   @IBOutlet private weak var dateLabel: UILabel!
   
     
-    struct State {
-        
+  struct State {
+      let title: String
+      let source: String
+      let date: String
+      
+      init(title: String, source: String, date: String) {
+        self.title = title
+        self.source = source
+        self.date = date
+        }
     }
     
     // MARK: - Properties
@@ -26,13 +34,13 @@ final class TitleView: XibView {
             configure()
         }
     }
-    
-    // MARK: - Lifecycle
-    override func didMoveToSuperview() {
-        super.didMoveToSuperview()
-        setupUI()
-    }
- 
+
+  // MARK: - Lifecycle
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    setupUI()
+  }
+     
     /*
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -49,17 +57,19 @@ extension TitleView {
 private extension TitleView {
     
     func setupUI() {
-        
+      titleLabel.textColor = .blue
     }
     
     func configure() {
-        
+      titleLabel.text = state?.title
+      sourceLabel.text = state?.source
+      dateLabel.text = state?.date
     }
 }
 
-/*
 // MARK: - TitleView.State + Hashable
 extension TitleView.State: Hashable {
-    
+  static func == (lhs: TitleView.State, rhs: TitleView.State) -> Bool {
+    return lhs.title == rhs.title && lhs.source == rhs.source && lhs.date == rhs.date
+  }
 }
- */
