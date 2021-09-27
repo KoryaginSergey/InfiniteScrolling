@@ -9,13 +9,13 @@
 import UIKit
 
 extension MainScreen {
-    enum Assembly {}
+  enum Assembly {}
 }
 
 extension MainScreen.Assembly {
-    static func createModule(with viewModel: MainScreenViewModelProtocol) -> UIViewController {
-        let viewController = MainScreenViewController.instantiate()
-        viewController.setDependencies(viewModel: viewModel)
-        return viewController
-    }
+  static func createModule(with viewModel: MainScreenViewModelProtocol) -> UIViewController {
+    let viewController = MainScreenViewController.instantiate()
+    viewController.setDependencies(viewModel: viewModel)
+    return viewController
+  }
 }

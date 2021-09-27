@@ -12,44 +12,44 @@ import Combine
 enum MainScreen {}
 
 extension MainScreen {
-    enum Models {}
+  enum Models {}
 }
 
 // MARK: - Models View Input/Output
 extension MainScreen.Models {
-
-    // MARK: Input
-    struct ViewModelInput {
-        let onLoad: AnyPublisher<Void, Never>
-    }
-
-    // MARK: Output
-    enum ViewState: Equatable {
-        case idle
-        case loading
-        case loaded(items: [MainScreen.Models.Item])
-        case empty
-        case failure
-    }
-
-    enum ViewAction {
-    }
-
-    enum ViewRoute {
-      case dismiss
-    }
+  
+  // MARK: Input
+  struct ViewModelInput {
+    let onLoad: AnyPublisher<Void, Never>
+  }
+  
+  // MARK: Output
+  enum ViewState: Equatable {
+    case idle
+    case loading
+    case loaded(items: [MainScreen.Models.Item])
+    case empty
+    case failure
+  }
+  
+  enum ViewAction {
+  }
+  
+  enum ViewRoute {
+    case dismiss
+  }
 }
 
 // MARK: - Scene Models
 extension MainScreen.Models {
-
-    // MARK: List Models
-    enum Section: Hashable {
-        case main
-    }
-
-    enum Item: Hashable {
-      case topItem(state: TopCollectionViewCell.State)
-      case bottomItem(state: BottomCollectionViewCell.State)
-    }
+  
+  // MARK: List Models
+  enum Section: Hashable {
+    case main
+  }
+  
+  enum Item: Hashable {
+    case topItem(state: TopCollectionViewCell.State)
+    case bottomItem(state: BottomCollectionViewCell.State)
+  }
 }
