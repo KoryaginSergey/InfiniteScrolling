@@ -49,13 +49,26 @@ private extension MainScreenViewModel {
   func fetch() {
     viewStateSubj.send(.loading)
     
-    
-    viewStateSubj.send(.loaded(items: [
-      .topItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil)),
-      .topItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil)),
-      .topItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil)),
-      .topItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil))
+    viewStateSubj.send(.loaded(sections: [
+        .init(items: [
+            .topItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil)),
+            .topItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil)),
+            .topItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil)),
+            .topItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil))
+        ]),
+        .init(items: [
+            .bottomItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil)),
+            .bottomItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil)),
+            .bottomItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil)),
+            .bottomItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil))
+        ])
     ]))
+//    viewStateSubj.send(.loaded(items: [
+//      .topItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil)),
+//      .topItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil)),
+//      .topItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil)),
+//      .topItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil))
+//    ]))
     
 //    viewStateSubj.send(.loaded(items: [
 //      .bottomItem(state: .init(titleViewState: .init(title: "title", source: "source", date: "date"), image: nil)),

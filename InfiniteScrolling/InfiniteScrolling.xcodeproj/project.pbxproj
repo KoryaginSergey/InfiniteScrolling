@@ -175,7 +175,6 @@
 				63C2689B26F9DDB400B826E7 /* SceneDelegate.swift */,
 				63C268A426F9DDB600B826E7 /* LaunchScreen.storyboard */,
 				63C268CC26F9E1B200B826E7 /* Resources */,
-				63C268CB26F9E15A00B826E7 /* Extensions */,
 				63C268CA26F9E14200B826E7 /* Networking */,
 				6336150D26FC5E19006B3688 /* Views */,
 				63C268AE26F9DE6600B826E7 /* MainScreen */,
@@ -208,13 +207,6 @@
 				6336152B26FDB0F2006B3688 /* ModelArticle.swift */,
 			);
 			path = Networking;
-			sourceTree = "<group>";
-		};
-		63C268CB26F9E15A00B826E7 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		63C268CC26F9E1B200B826E7 /* Resources */ = {

@@ -75,8 +75,8 @@ private extension MainScreenViewController {
       updateSnapshot([], animated: false)
     case .loading:
       startLoading()
-    case .loaded(items: let item):
-      self.updateSnapshot(item)
+    case .loaded(sections: let section):
+        self.updateSnapshot(section)
       collectionView.reloadData()
     //            stopLoading()
     case .empty:
@@ -103,11 +103,11 @@ private extension MainScreenViewController {
   }
 }
 
-// MARK: - DataSource
+// MARK: - DataSourc
 private extension MainScreenViewController {
   
-  func updateSnapshot(_ items: [MainScreen.Models.Item], animated: Bool = true) {
-    dataSource.updateSnapshot(items, animated: animated)
+  func updateSnapshot(_ sections: [MainScreen.Models.Section], animated: Bool = true) {
+    dataSource.updateSnapshot(sections, animated: animated)
   }
 }
 
