@@ -57,7 +57,7 @@ extension TitleView {
 private extension TitleView {
     
     func setupUI() {
-      titleLabel.textColor = .blue
+      sourceLabel.textColor = .systemBlue
     }
     
     func configure() {

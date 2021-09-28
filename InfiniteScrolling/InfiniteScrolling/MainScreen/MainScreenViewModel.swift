@@ -8,6 +8,7 @@
 
 import Foundation
 import Combine
+import UIKit
 
 protocol MainScreenViewModelProtocol: AnyObject {
   var viewState: AnyPublisher<MainScreen.Models.ViewState, Never> { get }
@@ -28,6 +29,7 @@ final class MainScreenViewModel {
   private let routeSubj = PassthroughSubject<MainScreen.Models.ViewRoute, Never>()
   
   private var subscriptions = Set<AnyCancellable>()
+  
 }
 
 // MARK: - MainScreenViewModelProtocol
@@ -50,38 +52,28 @@ private extension MainScreenViewModel {
     viewStateSubj.send(.loading)
     
     viewStateSubj.send(.loaded(sections: [
-        .init(items: [
-            .topItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil)),
-            .topItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil)),
-            .topItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil)),
-            .topItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil))
-        ]),
-        .init(items: [
-            .bottomItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil)),
-            .bottomItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil)),
-            .bottomItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil)),
-            .bottomItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil))
-        ])
+      .init(items: [
+        .topItem(state: .init(titleViewState: .init(title: "Trevon Diggs lead Dallas Cowboys to defeat of Philadelphia Eagles on MNF - USA TODAY", source: "SPORTS", date: "March 12, 2019"), image: UIImage(named: "sport"))),
+        .topItem(state: .init(titleViewState: .init(title: "Dallas Cowboys to defeat of Philadelphia Eagles on MNF - USA TODAY", source: "GAMES", date: "March 12, 2019"), image: UIImage(named: "nintendo"))),
+        .topItem(state: .init(titleViewState: .init(title: "Philadelphia Eagles on MNF - USA TODAY", source: "POLITICS", date: "March 12, 2019"), image: UIImage(named: "politic"))),
+        .topItem(state: .init(titleViewState: .init(title: "Cowboys to defeat of Philadelphia Eagles on MNF - USA TODAY", source: "BUSINESS", date: "March 12, 2019"), image: UIImage(named: "qovery")))
+      ]),
+      .init(items: [
+        .bottomItem(state: .init(titleViewState: .init(title: "Philadelphia Eagles on MNF - USA TODAY", source: "POLITICS", date: "March 12, 2019"), image: UIImage(named: "qovery"))),
+        .bottomItem(state: .init(titleViewState: .init(title: "Cowboys to defeat of Philadelphia Eagles on MNF", source: "BUSINESS", date: "March 12, 2019"), image: UIImage(named: "politic"))),
+        .bottomItem(state: .init(titleViewState: .init(title: "Dallas Cowboys to defeat of Philadelphia Eagles on MNF - USA TODAY", source: "SPORT", date: "March 12, 2019"), image: UIImage(named: "nintendo"))),
+        .bottomItem(state: .init(titleViewState: .init(title: "Dak Prescott, Ezekiel Elliott, Trevon Diggs lead Dallas Cowboys to defeat of Philadelphia Eagles on MNF - USA TODAY", source: "SPORT", date: "March 12, 2019"), image: UIImage(named: "swanTeam"))),
+        .bottomItem(state: .init(titleViewState: .init(title: "Philadelphia Eagles on MNF - USA TODAY", source: "SPORT", date: "March 12, 2019"), image: UIImage(named: "qovery"))),
+        .bottomItem(state: .init(titleViewState: .init(title: "MNF - USA TODAY", source: "BUSINESS", date: "March 12, 2019"), image: UIImage(named: "politic"))),
+        .bottomItem(state: .init(titleViewState: .init(title: "Dallas Cowboys to defeat of Philadelphia Eagles on MNF - USA TODAY", source: "SPORT", date: "March 12, 2019"), image: UIImage(named: "nintendo"))),
+        .bottomItem(state: .init(titleViewState: .init(title: "Philadelphia Eagles on MNF - USA TODAY", source: "SPORT", date: "March 12, 2019"), image: UIImage(named: "swanTeam"))),
+        .bottomItem(state: .init(titleViewState: .init(title: "Cowboys to defeat of Philadelphia Eagles on MNF - USA TODAY", source: "SPORT", date: "March 12, 2019"), image: UIImage(named: "qovery"))),
+        .bottomItem(state: .init(titleViewState: .init(title: "Ezekiel Elliott, Trevon Diggs lead Dallas Cowboys to defeat of Philadelphia Eagles on MNF - USA TODAY", source: "POLITICS", date: "March 12, 2019"), image: UIImage(named: "politic"))),
+        .bottomItem(state: .init(titleViewState: .init(title: "Dallas Cowboys to defeat of Philadelphia Eagles on MNF - USA TODAY", source: "GAMES", date: "March 12, 2019"), image: UIImage(named: "nintendo"))),
+        .bottomItem(state: .init(titleViewState: .init(title: "Dak Prescott, Ezekiel Elliott, Trevon Diggs lead Dallas Cowboys to defeat of Philadelphia Eagles on MNF - USA TODAY", source: "SPORT", date: "March 12, 2019"), image: UIImage(named: "swanTeam")))
+      ])
     ]))
-//    viewStateSubj.send(.loaded(items: [
-//      .topItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil)),
-//      .topItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil)),
-//      .topItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil)),
-//      .topItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil))
-//    ]))
     
-//    viewStateSubj.send(.loaded(items: [
-//      .bottomItem(state: .init(titleViewState: .init(title: "title", source: "source", date: "date"), image: nil)),
-//      .bottomItem(state: .init(titleViewState: .init(title: "привет", source: "test", date: "test"), image: nil)),
-//      .bottomItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil)),
-//      .bottomItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil)),
-//      .bottomItem(state: .init(titleViewState: .init(title: "title", source: "source", date: "date"), image: nil)),
-//      .bottomItem(state: .init(titleViewState: .init(title: "привет", source: "test", date: "test"), image: nil)),
-//      .bottomItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil)),
-//      .bottomItem(state: .init(titleViewState: .init(title: "title", source: "source", date: "date"), image: nil)),
-//      .bottomItem(state: .init(titleViewState: .init(title: "привет", source: "test", date: "test"), image: nil)),
-//      .bottomItem(state: .init(titleViewState: .init(title: "test", source: "test", date: "test"), image: nil))
-//    ]))
     
     //        service.fetch.sink { [weak self] result in
     //            guard let self = self else { return }

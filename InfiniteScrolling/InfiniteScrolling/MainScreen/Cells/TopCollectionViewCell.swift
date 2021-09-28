@@ -16,7 +16,7 @@ final class TopCollectionViewCell: UICollectionViewCell, NibReusable {
     }
     
     struct TitleView {
-      
+      static let cornerRadius: CGFloat = 15
     }
   }
   
@@ -71,6 +71,7 @@ private extension TopCollectionViewCell {
     topCellView.clipsToBounds = true
     
     let titleView = TitleView.loadFromNib()
+    
     viewForTitleView.addSubview(titleView)
     titleView.translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
@@ -79,6 +80,8 @@ private extension TopCollectionViewCell {
       titleView.leftAnchor.constraint(equalTo: viewForTitleView.leftAnchor),
       titleView.rightAnchor.constraint(equalTo: viewForTitleView.rightAnchor)
     ])
+    viewForTitleView.layer.cornerRadius = Defaults.TitleView.cornerRadius
+    viewForTitleView.clipsToBounds = true
     
     self.titleView = titleView
   }

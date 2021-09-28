@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="x8m-aF-55T">
-                                <rect key="frame" x="0.0" y="114" width="414" height="748"/>
+                                <rect key="frame" x="0.0" y="104" width="414" height="758"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Z6A-DH-SAs">
                                     <size key="itemSize" width="128" height="128"/>
@@ -38,7 +38,7 @@
                                 </cells>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Browse News" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b1w-ax-n7N">
-                                <rect key="frame" x="20" y="74" width="374" height="40"/>
+                                <rect key="frame" x="20" y="64" width="374" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="0ZS-Fm-aGy"/>
                                 </constraints>
@@ -56,7 +56,7 @@
                             <constraint firstItem="b1w-ax-n7N" firstAttribute="leading" secondItem="RHd-L1-Oo9" secondAttribute="leading" constant="20" id="Mb7-Ot-KrF"/>
                             <constraint firstItem="x8m-aF-55T" firstAttribute="leading" secondItem="RHd-L1-Oo9" secondAttribute="leading" id="T8m-7j-gEx"/>
                             <constraint firstItem="x8m-aF-55T" firstAttribute="top" secondItem="b1w-ax-n7N" secondAttribute="bottom" id="c8d-ke-60P"/>
-                            <constraint firstItem="b1w-ax-n7N" firstAttribute="top" secondItem="RHd-L1-Oo9" secondAttribute="top" constant="30" id="tg5-gO-YlI"/>
+                            <constraint firstItem="b1w-ax-n7N" firstAttribute="top" secondItem="RHd-L1-Oo9" secondAttribute="top" constant="20" id="tg5-gO-YlI"/>
                         </constraints>
                     </view>
                     <connections>

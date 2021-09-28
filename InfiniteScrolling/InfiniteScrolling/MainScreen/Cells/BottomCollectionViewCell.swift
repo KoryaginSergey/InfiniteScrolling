@@ -13,6 +13,9 @@ final class BottomCollectionViewCell: UICollectionViewCell, NibReusable {
     struct BottomImage {
       static let cornerRadius: CGFloat = 15
     }
+    struct TitleView {
+      
+    }
   }
   
   @IBOutlet private weak var bottomCellImageView: UIImageView!
