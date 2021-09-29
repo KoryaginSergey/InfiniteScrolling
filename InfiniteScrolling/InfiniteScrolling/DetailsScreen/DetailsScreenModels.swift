@@ -26,10 +26,7 @@ extension DetailsScreen.Models {
     // MARK: Output
     enum ViewState: Equatable {
         case idle
-        case loading
-        case loaded
-        case empty
-        case failure
+        case loaded()// добавить сюда структуру с моделью
     }
 
     enum ViewAction {

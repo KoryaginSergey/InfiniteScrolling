@@ -23,14 +23,14 @@ final class BottomCollectionViewCell: UICollectionViewCell, NibReusable {
   
   private var titleView: TitleView?
   
-    struct State {
-      let id = UUID().hashValue
-      let titleViewState: TitleView.State
-      let image: UIImage?
-    }
+//    struct State {
+//      let id = UUID().hashValue
+//      let titleViewState: TitleView.State
+//      let image: UIImage?
+//    }
     
     // MARK: - Properties
-    var state: State? {
+    var state: MainScreen.Models.State? {
         didSet {
             configure()
         }
@@ -86,9 +86,9 @@ private extension BottomCollectionViewCell {
 
  // MARK: - BottomCollectionViewCell.State + Hashable
 
-extension BottomCollectionViewCell.State: Hashable {
-  static func == (lhs: BottomCollectionViewCell.State, rhs: BottomCollectionViewCell.State) -> Bool {
-    return lhs.id == rhs.id && lhs.image == rhs.image && lhs.titleViewState == rhs.titleViewState
-  }
-}
+//extension BottomCollectionViewCell.State: Hashable {
+//  static func == (lhs: BottomCollectionViewCell.State, rhs: BottomCollectionViewCell.State) -> Bool {
+//    return lhs.id == rhs.id && lhs.image == rhs.image && lhs.titleViewState == rhs.titleViewState
+//  }
+//}
  

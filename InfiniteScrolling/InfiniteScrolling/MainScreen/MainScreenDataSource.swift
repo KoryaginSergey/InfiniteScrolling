@@ -37,6 +37,10 @@ final class MainScreenDataSource {
     
   }
   
+  func getItem(indexPath: IndexPath) -> MainScreen.Models.Item? {
+    return dataSource.itemIdentifier(for: indexPath)
+  }
+  
   // MARK: - Interface
   func updateSnapshot(_ sections: [MainScreen.Models.Section], animated: Bool = true) {
     var snapshot = Snapshot()

@@ -20,14 +20,17 @@ protocol DetailsScreenViewModelProtocol: AnyObject {
 final class DetailsScreenViewModel {
     
     // MARK: - Properties
-//    @Injected(container: .shared)
-//    private var hapticService: HapticFeedbackServiceProtocol
-    
+    var state: MainScreen.Models.State?
+  
     private let viewStateSubj = CurrentValueSubject<DetailsScreen.Models.ViewState, Never>(.idle)
     private let viewActionSubj = PassthroughSubject<DetailsScreen.Models.ViewAction, Never>()
     private let routeSubj = PassthroughSubject<DetailsScreen.Models.ViewRoute, Never>()
     
     private var subscriptions = Set<AnyCancellable>()
+  
+  init(state: MainScreen.Models.State? = nil) {
+    self.state = state
+  }
 }
 
 // MARK: - DetailsScreenViewModelProtocol
@@ -38,9 +41,11 @@ extension DetailsScreenViewModel: DetailsScreenViewModelProtocol {
     var route: AnyPublisher<DetailsScreen.Models.ViewRoute, Never> { routeSubj.eraseToAnyPublisher() }
     
     func process(input: DetailsScreen.Models.ViewModelInput) {
-//        input.onLoad.sink { [weak self] _ in
+        input.onLoad.sink { [weak self] _ in
 //            self?.fetch()
-//        }.store(in: &subscriptions)
+//          viewStateSubj.send(.loaded())
+          //вызвать loaded со структурой
+        }.store(in: &subscriptions)
     }
 }
 

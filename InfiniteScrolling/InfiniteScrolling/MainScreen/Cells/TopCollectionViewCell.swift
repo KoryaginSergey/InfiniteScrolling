@@ -24,17 +24,10 @@ final class TopCollectionViewCell: UICollectionViewCell, NibReusable {
   @IBOutlet private weak var topCellImageView: UIImageView!
   @IBOutlet private weak var viewForTitleView: UIView!
   
-  
   private var titleView: TitleView?
   
-  struct State {
-    let id = UUID().hashValue
-    let titleViewState: TitleView.State
-    let image: UIImage?
-  }
-  
   // MARK: - Properties
-  var state: State? {
+  var state: MainScreen.Models.State? {
     didSet {
       configure()
     }
@@ -94,8 +87,8 @@ private extension TopCollectionViewCell {
 }
 
  // MARK: - TopCollectionViewCell.State + Hashable
-extension TopCollectionViewCell.State: Hashable {
-  static func == (lhs: TopCollectionViewCell.State, rhs: TopCollectionViewCell.State) -> Bool {
-    return lhs.id == rhs.id && lhs.image == rhs.image && lhs.titleViewState == rhs.titleViewState
-  }
-}
+//extension TopCollectionViewCell.State: Hashable {
+//  static func == (lhs: TopCollectionViewCell.State, rhs: TopCollectionViewCell.State) -> Bool {
+//    return lhs.id == rhs.id && lhs.image == rhs.image && lhs.titleViewState == rhs.titleViewState
+//  }
+//}

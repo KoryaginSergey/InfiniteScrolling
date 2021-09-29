@@ -28,7 +28,10 @@ final class MainScreenViewController: UIViewController, StoryboardBased {
     setup()
     bind(to: viewModel)
     onLoad.send(())
-        
+    collectionView.delegate = self
+    PostServices.shared.getPosts { modelArticle in
+      
+    }
   }
 }
 
@@ -121,5 +124,23 @@ private extension MainScreenViewController {
   }
   
   func stopLoading() {
+  }
+}
+
+extension MainScreenViewController: UICollectionViewDelegate {
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let item = dataSource.getItem(indexPath: indexPath)
+
+    var snapshot: MainScreen.Models.State?
+    switch item {
+    case let .topItem(state: state):
+      snapshot = state
+    case let .bottomItem(state: state):
+      snapshot = state
+    default:
+      break
+    }
+    
+    present(DetailsScreen.Assembly.createModule(with: DetailsScreenViewModel(state: snapshot)), animated: true, completion: nil)
   }
 }

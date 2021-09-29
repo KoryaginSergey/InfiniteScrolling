@@ -73,14 +73,8 @@ private extension DetailsScreenViewController {
         switch state {
         case .idle:
             break
-        case .loading:
-            startLoading()
-        case .loaded:
-            stopLoading()
-        case .empty:
-            stopLoading()
-        case .failure:
-            stopLoading()
+        case .loaded://обработать структуру, добавить данные на UI
+            break
         }
     }
 

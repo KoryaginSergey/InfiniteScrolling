@@ -6,6 +6,7 @@
 //  Copyright © 2021 ___ORGANIZATIONNAME___ All rights reserved.
 //
 
+import UIKit
 import Foundation
 import Combine
 
@@ -43,6 +44,12 @@ extension MainScreen.Models {
 // MARK: - Scene Models
 extension MainScreen.Models {
     
+    struct State {
+      let id = UUID().hashValue
+      let titleViewState: TitleView.State
+      let image: UIImage?
+    }
+  
     struct Section: Hashable {
         let items: [Item]
     }
@@ -54,9 +61,14 @@ extension MainScreen.Models {
 //    }
     
     enum Item: Hashable {
-        case topItem(state: TopCollectionViewCell.State)
-        case bottomItem(state: BottomCollectionViewCell.State)
+        case topItem(state: MainScreen.Models.State)
+        case bottomItem(state: MainScreen.Models.State)
     }
 }
 
+extension MainScreen.Models.State: Hashable {
+  static func == (lhs: MainScreen.Models.State, rhs: MainScreen.Models.State) -> Bool {
+    return lhs.id == rhs.id && lhs.image == rhs.image && lhs.titleViewState == rhs.titleViewState
+  }
+}
 
