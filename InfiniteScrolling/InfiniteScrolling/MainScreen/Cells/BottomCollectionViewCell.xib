@@ -65,7 +65,7 @@
                 <outlet property="bottomCellImageView" destination="NRI-KL-2BY" id="JjK-gR-m9G"/>
                 <outlet property="viewForTitleView" destination="9ct-bc-8hu" id="Sd5-wf-rlS"/>
             </connections>
-            <point key="canvasLocation" x="-1194.2028985507247" y="-128.57142857142856"/>
+            <point key="canvasLocation" x="-1261" y="-150"/>
         </collectionViewCell>
     </objects>
     <resources>

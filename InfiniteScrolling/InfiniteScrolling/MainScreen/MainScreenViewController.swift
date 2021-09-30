@@ -29,9 +29,7 @@ final class MainScreenViewController: UIViewController, StoryboardBased {
     bind(to: viewModel)
     onLoad.send(())
     collectionView.delegate = self
-    PostServices.shared.getPosts { modelArticle in
-      
-    }
+   
   }
 }
 

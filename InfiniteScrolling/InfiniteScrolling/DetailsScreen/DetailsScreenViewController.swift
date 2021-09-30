@@ -16,6 +16,8 @@ final class DetailsScreenViewController: UIViewController, StoryboardBased {
   @IBOutlet private weak var viewForTitleView: UIView!
   @IBOutlet private weak var textView: UITextView!
   
+  private var titleView: TitleView?
+  
 
     // MARK: - Properties
     private var viewModel: DetailsScreenViewModelProtocol?
@@ -73,7 +75,11 @@ private extension DetailsScreenViewController {
         switch state {
         case .idle:
             break
-        case .loaded://обработать структуру, добавить данные на UI
+        case .loaded(item: let item)://обработать структуру, добавить данные на UI
+          textView.text = item.content
+          detailsImageView.image = item.image
+          
+          
             break
         }
     }
@@ -96,6 +102,17 @@ private extension DetailsScreenViewController {
 private extension DetailsScreenViewController {
 
     func setup() {
+      let titleView = TitleView.loadFromNib()
+      
+      viewForTitleView.addSubview(titleView)
+      titleView.translatesAutoresizingMaskIntoConstraints = false
+      NSLayoutConstraint.activate([
+        titleView.topAnchor.constraint(equalTo: viewForTitleView.topAnchor),
+        titleView.bottomAnchor.constraint(equalTo: viewForTitleView.bottomAnchor),
+        titleView.leftAnchor.constraint(equalTo: viewForTitleView.leftAnchor),
+        titleView.rightAnchor.constraint(equalTo: viewForTitleView.rightAnchor)
+      ])
+      self.titleView = titleView
     }
     
     func startLoading() {

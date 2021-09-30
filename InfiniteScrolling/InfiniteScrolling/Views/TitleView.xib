@@ -72,7 +72,7 @@
                 <outlet property="sourceLabel" destination="liQ-Un-6su" id="V6L-ux-8yL"/>
                 <outlet property="titleLabel" destination="n4y-za-jAL" id="ttG-29-mh7"/>
             </connections>
-            <point key="canvasLocation" x="-159.42028985507247" y="-727.56696428571422"/>
+            <point key="canvasLocation" x="-204" y="-738"/>
         </view>
     </objects>
     <resources>
