@@ -77,7 +77,7 @@ private extension DetailsScreenViewController {
         switch state {
         case .idle:
             break
-        case .loaded(item: let item)://обработать структуру, добавить данные на UI
+        case .loaded(state: let item)://обработать структуру, добавить данные на UI
           textView.text = item.content
           detailsImageView.image = item.image
           titleView?.state = item.titleViewState
@@ -115,7 +115,9 @@ private extension DetailsScreenViewController {
       ])
       self.titleView = titleView
       topView.layer.cornerRadius = 45
+      topView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
       bottomView.layer.cornerRadius = 45
+      bottomView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }
     
     func startLoading() {

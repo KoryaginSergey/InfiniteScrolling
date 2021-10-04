@@ -11,12 +11,15 @@ import Foundation
 public typealias HTTPParameters = [String: Any]?
 public typealias HTTPHeaders = [String: Any]?
 
+let defaultParams: HTTPParameters = ["country" : "us",
+                                     "apiKey" : "97777613713c49a48689879ed89eaeb3"]
+
 struct HTTPNetworkRequest {
     
     /// Set the body, method, headers, and paramaters of the request
     static func configureHTTPRequest(from route: HTTPNetworkRoute, with parameters: HTTPParameters, includes headers: HTTPHeaders, contains body: Data?, and method: HTTPMethod) throws -> URLRequest {
         
-        guard let url = URL(string: "YOUR_BASE_URL\(route.rawValue)") else { throw HTTPNetworkError.missingURL}
+        guard let url = URL(string: "https://newsapi.org/v2/top-headlines") else { throw HTTPNetworkError.missingURL}
         
         /*
                     *** NOTES ABOUT REQUEST ***
@@ -32,7 +35,9 @@ struct HTTPNetworkRequest {
         
         request.httpMethod = method.rawValue
         request.httpBody = body
-        try configureParametersAndHeaders(parameters: parameters, headers: headers, request: &request)
+        var params = defaultParams
+        params?.merge(parameters ?? [:]){(current, _) in current}
+        try configureParametersAndHeaders(parameters: params, headers: headers, request: &request)
         
         return request
     }

@@ -13,13 +13,13 @@ import Foundation
 
 
 
-//
+
 //class NetworkManager {
 //
 //  private init() {}
 //  static let shared: NetworkManager = NetworkManager()
 //
-//  private let listEverythingURL = URL(string: "https://newsapi.org/v2/top-headlines?country=us&apiKey=97777613713c49a48689879ed89eaeb3")!
+//  private let listHeadlinesURL = URL(string: "https://newsapi.org/v2/top-headlines?country=us&apiKey=97777613713c49a48689879ed89eaeb3")!
 //
 //
 //  // MARK: - Universal decodable function
@@ -53,21 +53,21 @@ import Foundation
 //      task.resume()
 //      return task
 //  }
-//  
-//  func apiToGetEverythingList(completion : @escaping (ModelArticle) -> ()){
-//          URLSession.shared.dataTask(with: listEverythingURL) { (data, urlResponse, error) in
+  
+//  func apiToGetHeadlinesList(completion : @escaping ((ModelArticle?) -> ())) {
+//          URLSession.shared.dataTask(with: listHeadlinesURL) { (data, urlResponse, error) in
 //              if let data = data {
-//                  
+//
 //                  let jsonDecoder = JSONDecoder()
-//                  
+//
 //                  let articleData = try! jsonDecoder.decode(ModelArticle.self, from: data)
 //                      completion(articleData)
 //                print(articleData)
 //              }
 //          }.resume()
 //      }
-//  
-//  
-//  
-//  
+//
+//
+//
+//
 //}

@@ -7,18 +7,25 @@
 
 import Foundation
 
+public struct Page {
+   var size: Int
+   var page: Int
+   
+   func getParameters() -> HTTPParameters {
+     ["pageSize": size,
+      "page" : page]
+   }
+ }
+
 
 struct PostServices{
-  
+
   static let shared = PostServices()
   let postSession = URLSession(configuration: .default)
-  let parameters = [ "YOUR_KEY": "YOUR_VALUES" ]
-  // NOTE : NOT ALL Request requires parameters. You can pass nil in the configureHTTPRequest() method for the parameter argument.
-
-  func getPosts(_ completion: @escaping (Result<[ModelArticle]>) -> ()) {
-
+  
+  func getPosts(page: Page, _ completion: @escaping (Result<ModelArticle>) -> ()) {
     do{
-      let request = try HTTPNetworkRequest.configureHTTPRequest(from: .getAllPosts, with: .none, includes: .none, contains: .none, and: .get)
+      let request = try HTTPNetworkRequest.configureHTTPRequest(from: .none, with: page.getParameters(), includes: .none, contains: nil, and: .get)
 
       postSession.dataTask(with: request) { (data, res, err) in
 
@@ -28,7 +35,7 @@ struct PostServices{
           switch result {
 
           case .success:
-            let result = try? JSONDecoder().decode([ModelArticle].self, from: unwrappedData)
+            let result = try? JSONDecoder().decode(ModelArticle.self, from: unwrappedData)
             completion(Result.success(result!))
             print(result)
           case .failure:

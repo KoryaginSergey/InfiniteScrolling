@@ -13,4 +13,5 @@ public enum HTTPNetworkRoute: String{
   case createPost = "posts/new"
   case editPost = "posts/:id/edit"
   case deletePost = "posts/:id"
+  case none = ""
 }

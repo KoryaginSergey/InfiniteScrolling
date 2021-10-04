@@ -29,7 +29,15 @@ final class MainScreenViewController: UIViewController, StoryboardBased {
     bind(to: viewModel)
     onLoad.send(())
     collectionView.delegate = self
-   
+//    NetworkManager.shared.apiToGetHeadlinesList { (modArt) in
+//
+//    }
+//    PostServices.shared.getPosts { (modelArt) in
+//
+//    }
+    PostServices.shared.getPosts(page: .init(size: 2, page: 1)) { (modelAtr) in
+      
+    }
   }
 }
 
