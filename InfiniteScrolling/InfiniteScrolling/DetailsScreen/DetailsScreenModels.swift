@@ -27,7 +27,7 @@ extension DetailsScreen.Models {
   // MARK: Output
   enum ViewState: Equatable {
     case idle
-    case loaded(item: DetailsScreen.Models.State)// добавить сюда структуру с моделью
+    case loaded(state: DetailsScreen.Models.State)// добавить сюда структуру с моделью
   }
   
   enum ViewAction {
@@ -53,9 +53,9 @@ extension DetailsScreen.Models {
   //        case main
   //    }
   //
-      struct Item: Hashable {
-        let item: DetailsScreen.Models.State
-      }
+//      struct Item: Hashable {
+//        let item: DetailsScreen.Models.State
+//      }
 }
 
 extension DetailsScreen.Models.State: Hashable {

@@ -12,6 +12,8 @@ import Combine
 final class DetailsScreenViewController: UIViewController, StoryboardBased {
   
   
+  @IBOutlet private weak var topView: UIView!
+  @IBOutlet private weak var bottomView: UIView!
   @IBOutlet private weak var detailsImageView: UIImageView!
   @IBOutlet private weak var viewForTitleView: UIView!
   @IBOutlet private weak var textView: UITextView!
@@ -78,8 +80,7 @@ private extension DetailsScreenViewController {
         case .loaded(item: let item)://обработать структуру, добавить данные на UI
           textView.text = item.content
           detailsImageView.image = item.image
-          
-          
+          titleView?.state = item.titleViewState
             break
         }
     }
@@ -113,6 +114,8 @@ private extension DetailsScreenViewController {
         titleView.rightAnchor.constraint(equalTo: viewForTitleView.rightAnchor)
       ])
       self.titleView = titleView
+      topView.layer.cornerRadius = 45
+      bottomView.layer.cornerRadius = 45
     }
     
     func startLoading() {

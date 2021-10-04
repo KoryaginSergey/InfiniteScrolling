@@ -16,7 +16,7 @@ final class TitleView: UIView, NibLoadable {
   @IBOutlet private weak var dateLabel: UILabel!
   
     
-  struct State {
+ public struct State {
       let title: String
       let source: String
       let date: String
@@ -29,7 +29,7 @@ final class TitleView: UIView, NibLoadable {
     }
     
     // MARK: - Properties
-    var state: State? {
+  public var state: State? {
         didSet {
             configure()
         }

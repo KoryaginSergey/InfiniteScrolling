@@ -44,7 +44,7 @@ extension DetailsScreenViewModel: DetailsScreenViewModelProtocol {
     func process(input: DetailsScreen.Models.ViewModelInput) {
         input.onLoad.sink { [weak self] _ in
 //            self?.fetch()
-          self?.viewStateSubj.send(.loaded(item: .init(titleViewState: .init(title: "ff", source: "rr", date: "ff"), image: UIImage(named: "sport"), content: "ffllllllllllll")))
+          self?.viewStateSubj.send(.loaded(item: .init(titleViewState: .init(title: "Dallas Cowboys to defeat of Philadelphia Eagles on MNF - USA TODAY", source: "SPORT", date: "March 12, 2019"), image: UIImage(named: "sport"), content: "Ezekiel Elliott, Trevon Diggs lead Dallas Cowboys to defeat of Philadelphia Eagles on MNF - USA TODAY")))
 //          viewStateSubj.send(.loaded(item: .init(item: .init(titleViewState: .init(title: "hi", source: "hi", date: "hi"), image: UIImage(named: "sport"), content: "ggggggg"))))
           //вызвать loaded со структурой
         }.store(in: &subscriptions)
