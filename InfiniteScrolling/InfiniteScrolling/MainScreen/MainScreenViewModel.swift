@@ -58,12 +58,15 @@ private extension MainScreenViewModel {
       
       switch result {
       case let .success(data):
-        let items = data.articles?.map({ (article) -> MainScreen.Models.Item in
-          return .topItem(state: .init(titleViewState: .init(title: article.title ?? "", source: article.source?.name ?? "", date: article.publishedAt ?? ""), image: nil))
+        let itemsTop = data.articles?.map({ (article) -> MainScreen.Models.Item in
+          return .topItem(state: .init(titleViewState: .init(title: article.title ?? "", source: article.source?.name ?? "", date: article.publishedAt ?? ""), image: UIImage(named: "sport")))
+        })
+        let itemsBottom = data.articles?.map({ (article) -> MainScreen.Models.Item in
+          return .bottomItem(state: .init(titleViewState: .init(title: article.title ?? "", source: article.source?.name ?? "", date: article.publishedAt ?? ""), image: UIImage(named: "sport")))
         })
 
-        self?.viewStateSubj.send(.loaded(sections: [
-                                          .init(items: items ?? [])]))
+        self?.viewStateSubj.send(.loaded(sections: [.init(items: itemsTop ?? []),
+                                                    .init(items: itemsBottom ?? []) ]))
         
       print(data)
       case let .failure(error):
