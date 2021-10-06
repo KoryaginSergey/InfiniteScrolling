@@ -9,7 +9,6 @@ import Foundation
 
 
 public enum HTTPNetworkError: String, Error {
-  
   case parametersNil = "Error Found : Parameters are nil."
   case headersNil = "Error Found : Headers are Nil"
   case encodingFailed = "Error Found : Parameter Encoding failed."

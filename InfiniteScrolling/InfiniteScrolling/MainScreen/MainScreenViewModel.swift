@@ -9,6 +9,8 @@
 import Foundation
 import Combine
 import UIKit
+import SDWebImage
+
 
 protocol MainScreenViewModelProtocol: AnyObject {
   var viewState: AnyPublisher<MainScreen.Models.ViewState, Never> { get }
@@ -33,6 +35,9 @@ final class MainScreenViewModel {
   private var subscriptions = Set<AnyCancellable>()
  
   var page = Page(size: 10, page: 1)
+  
+  private var topItems:[Article] = []
+  private var bottomItems:[Article] = []
 }
 
 // MARK: - MainScreenViewModelProtocol
@@ -51,28 +56,62 @@ extension MainScreenViewModel: MainScreenViewModelProtocol {
 
 // MARK: - Private
 private extension MainScreenViewModel {
+  
+  func setImage(urlToImage: URL) -> UIImageView {
+    var image: UIImageView?
+    image?.sd_setImage(with: urlToImage, placeholderImage: UIImage(named: "sport"))
+    return image!
+  }
+  
   func fetch() {
     viewStateSubj.send(.loading)
     
-    PostServices.shared.getPosts(page: page) { [weak self] (result) in
-      
+    let group = DispatchGroup()
+    
+    group.enter()
+    PostServices.shared.getTopPosts(page: page) { [weak self] (result) in
       switch result {
       case let .success(data):
-        let itemsTop = data.articles?.map({ (article) -> MainScreen.Models.Item in
-          return .topItem(state: .init(titleViewState: .init(title: article.title ?? "", source: article.source?.name ?? "", date: article.publishedAt ?? ""), image: UIImage(named: "sport")))
-        })
-        let itemsBottom = data.articles?.map({ (article) -> MainScreen.Models.Item in
-          return .bottomItem(state: .init(titleViewState: .init(title: article.title ?? "", source: article.source?.name ?? "", date: article.publishedAt ?? ""), image: UIImage(named: "sport")))
-        })
-
-        self?.viewStateSubj.send(.loaded(sections: [.init(items: itemsTop ?? []),
-                                                    .init(items: itemsBottom ?? []) ]))
+        guard let articles = data.articles else {
+          return
+        }
+        self?.topItems = articles
         
       print(data)
       case let .failure(error):
       print(error)
       }
+      group.leave()
+    }
+    
+    group.enter()
+    PostServices.shared.getBottomPosts(page: page) { [weak self] (result) in
+      switch result {
+      case let .success(data):
+        guard let articles = data.articles else {
+          return
+        }
+        self?.bottomItems = articles
+      case let .failure(error):
+      print(error)
+      }
+      group.leave()
+    }
+    
+    group.notify(queue: DispatchQueue.main) { [weak self] in
+      let itemsTop = self?.topItems.map({ (article) -> MainScreen.Models.Item in
+//        let image = UIImage()
+//        return .topItem(state: .init(titleViewState: .init(title: article.title ?? "", source: article.source?.name ?? "", date: article.publishedAt ?? ""), image: setImage(urlToImage: article.urlToImage!)))
+//      })
       
+      return .topItem(state: .init(titleViewState: .init(title: article.title ?? "", source: article.source?.name ?? "", date: article.publishedAt ?? ""), image: UIImage(named: "sport")))
+    })
+      let itemsBottom = self?.bottomItems.map({ (article) -> MainScreen.Models.Item in
+        return .bottomItem(state: .init(titleViewState: .init(title: article.title ?? "", source: article.source?.name ?? "", date: article.publishedAt ?? ""), image: UIImage(named: "sport")))
+      })
+      
+      self?.viewStateSubj.send(.loaded(sections: [.init(items: itemsTop ?? []),
+                                                  .init(items: itemsBottom ?? []) ]))
     }
     
 //    viewStateSubj.send(.loaded(sections: [

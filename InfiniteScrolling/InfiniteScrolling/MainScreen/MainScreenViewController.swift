@@ -35,9 +35,7 @@ final class MainScreenViewController: UIViewController, StoryboardBased {
 //    PostServices.shared.getPosts { (modelArt) in
 //
 //    }
-    PostServices.shared.getPosts(page: .init(size: 2, page: 1)) { (modelAtr) in
-      
-    }
+
   }
 }
 
