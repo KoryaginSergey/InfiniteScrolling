@@ -80,7 +80,7 @@ private extension TopCollectionViewCell {
   }
   
   func configure() {
-    topCellImageView.image = state?.image
+    topCellImageView.sd_setImage(with: state?.imageURL, placeholderImage: UIImage(named: "news1"), options: [], completed: nil)
     titleView?.state = state?.titleViewState
 //    state?.completionHandler()
   }

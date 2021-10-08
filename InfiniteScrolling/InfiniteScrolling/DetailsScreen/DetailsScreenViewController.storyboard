@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mkR-Xp-Qcz">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="409"/>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zuS-fk-5rF">
                                         <rect key="frame" x="0.0" y="286.5" width="414" height="531.5"/>
@@ -36,7 +36,7 @@
                                                 <rect key="frame" x="20" y="150" width="374" height="381.5"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <color key="textColor" systemColor="labelColor"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                         </subviews>
@@ -60,7 +60,7 @@
                                     <constraint firstItem="zuS-fk-5rF" firstAttribute="height" secondItem="Cki-Zk-rzB" secondAttribute="height" multiplier="0.65" id="H5M-az-a66"/>
                                     <constraint firstAttribute="bottom" secondItem="zuS-fk-5rF" secondAttribute="bottom" id="HYM-ki-R62"/>
                                     <constraint firstItem="zuS-fk-5rF" firstAttribute="leading" secondItem="Cki-Zk-rzB" secondAttribute="leading" id="Xoz-lq-8oX"/>
-                                    <constraint firstAttribute="bottom" secondItem="mkR-Xp-Qcz" secondAttribute="bottom" id="iJM-Np-Egw"/>
+                                    <constraint firstItem="mkR-Xp-Qcz" firstAttribute="height" secondItem="Cki-Zk-rzB" secondAttribute="height" multiplier="0.5" id="faQ-Yc-FCz"/>
                                     <constraint firstItem="mkR-Xp-Qcz" firstAttribute="top" secondItem="Cki-Zk-rzB" secondAttribute="top" id="ntL-N3-8Tc"/>
                                 </constraints>
                             </view>
@@ -84,7 +84,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SPs-1e-mb8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-307.24637681159425" y="75.669642857142847"/>
+            <point key="canvasLocation" x="-884" y="87"/>
         </scene>
     </scenes>
     <resources>

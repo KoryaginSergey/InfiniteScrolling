@@ -47,7 +47,7 @@ extension MainScreen.Models {
     struct State {
       let id = UUID().hashValue
       let titleViewState: TitleView.State
-      let image: UIImage?
+      let imageURL: URL?
     }
   
     struct Section: Hashable {
@@ -68,7 +68,7 @@ extension MainScreen.Models {
 
 extension MainScreen.Models.State: Hashable {
   static func == (lhs: MainScreen.Models.State, rhs: MainScreen.Models.State) -> Bool {
-    return lhs.id == rhs.id && lhs.image == rhs.image && lhs.titleViewState == rhs.titleViewState
+    return lhs.id == rhs.id && lhs.imageURL == rhs.imageURL && lhs.titleViewState == rhs.titleViewState
   }
 }
 

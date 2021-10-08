@@ -18,10 +18,7 @@ public struct Page {
    }
  }
 
-
 struct PostServices{
-
-  
 
   static let shared = PostServices()
   let postSession = URLSession(configuration: .default)
@@ -32,20 +29,15 @@ struct PostServices{
     
     do{
       params?.merge(page.getParameters() ?? [:]) {(current, _) in current}
-      
       let request = try HTTPNetworkRequest.configureHTTPRequest(from: .none, with: params, includes: .none, contains: nil, and: .get, endpoint: endPoint)
 
       postSession.dataTask(with: request) { (data, res, err) in
-
         if let response = res as? HTTPURLResponse, let unwrappedData = data {
-
           let result = HTTPNetworkResponse.handleNetworkResponse(for: response)
           switch result {
-
           case .success:
             let result = try? JSONDecoder().decode(ModelArticle.self, from: unwrappedData)
             completion(Result.success(result!))
-            print(result)
           case .failure:
             completion(Result.failure(HTTPNetworkError.decodingFailed))
           }
@@ -62,20 +54,15 @@ struct PostServices{
     
     do{
       params?.merge(page.getParameters() ?? [:]) {(current, _) in current}
-      
       let request = try HTTPNetworkRequest.configureHTTPRequest(from: .none, with: params, includes: .none, contains: nil, and: .get, endpoint: endPoint)
 
       postSession.dataTask(with: request) { (data, res, err) in
-
         if let response = res as? HTTPURLResponse, let unwrappedData = data {
-
           let result = HTTPNetworkResponse.handleNetworkResponse(for: response)
           switch result {
-
           case .success:
             let result = try? JSONDecoder().decode(ModelArticle.self, from: unwrappedData)
             completion(Result.success(result!))
-            print(result)
           case .failure:
             completion(Result.failure(HTTPNetworkError.decodingFailed))
           }

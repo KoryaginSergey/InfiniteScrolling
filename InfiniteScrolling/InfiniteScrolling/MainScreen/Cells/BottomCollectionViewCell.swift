@@ -79,7 +79,7 @@ private extension BottomCollectionViewCell {
     }
     
     func configure() {
-      bottomCellImageView.image = state?.image
+      bottomCellImageView.sd_setImage(with: state?.imageURL, placeholderImage: UIImage(named: "news1"), options: [], completed: nil)
       titleView?.state = state?.titleViewState
     }
 }

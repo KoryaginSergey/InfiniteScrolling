@@ -29,13 +29,6 @@ final class MainScreenViewController: UIViewController, StoryboardBased {
     bind(to: viewModel)
     onLoad.send(())
     collectionView.delegate = self
-//    NetworkManager.shared.apiToGetHeadlinesList { (modArt) in
-//
-//    }
-//    PostServices.shared.getPosts { (modelArt) in
-//
-//    }
-
   }
 }
 
@@ -63,17 +56,17 @@ private extension MainScreenViewController {
         self?.render(state)
       }).store(in: &subscriptions)
     
-    viewModel?.route
-      .receive(on: DispatchQueue.main)
-      .sink(receiveValue: { [weak self] route in
-        self?.handleRoute(route)
-      }).store(in: &subscriptions)
+//    viewModel?.route
+//      .receive(on: DispatchQueue.main)
+//      .sink(receiveValue: { [weak self] route in
+//        self?.handleRoute(route)
+//      }).store(in: &subscriptions)
     
-    viewModel?.viewAction
-      .receive(on: DispatchQueue.main)
-      .sink(receiveValue: { [weak self] action in
-        self?.handleAction(action)
-      }).store(in: &subscriptions)
+//    viewModel?.viewAction
+//      .receive(on: DispatchQueue.main)
+//      .sink(receiveValue: { [weak self] action in
+//        self?.handleAction(action)
+//      }).store(in: &subscriptions)
   }
   
   func render(_ state: MainScreen.Models.ViewState) {
@@ -93,21 +86,21 @@ private extension MainScreenViewController {
     }
   }
   
-  func handleAction(_ action: MainScreen.Models.ViewAction) {
-    switch action {
-    //show alert
-    //scrollToTop
-    // ...
-    }
-  }
+//  func handleAction(_ action: MainScreen.Models.ViewAction) {
+//    switch action {
+//    //show alert
+//    //scrollToTop
+//    // ...
+//    }
+//  }
   
-  func handleRoute(_ route: MainScreen.Models.ViewRoute) {
-    switch route {
-    case .dismiss:
-      break
-    //          dismiss(animated: true, completion: nil)
-    }
-  }
+//  func handleRoute(_ route: MainScreen.Models.ViewRoute) {
+//    switch route {
+//    case .dismiss:
+//      break
+//    //          dismiss(animated: true, completion: nil)
+//    }
+//  }
 }
 
 // MARK: - DataSourc
@@ -133,18 +126,17 @@ private extension MainScreenViewController {
 
 extension MainScreenViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    let item = dataSource.getItem(indexPath: indexPath)
 
-    var snapshot: MainScreen.Models.State?
-    switch item {
-    case let .topItem(state: state):
-      snapshot = state
-    case let .bottomItem(state: state):
-      snapshot = state
+    
+    var article: Article?
+    switch indexPath.section {
+    case 0:
+      article = viewModel?.topItems[indexPath.row]
+    case 1:
+      article = viewModel?.bottomItems[indexPath.row]
     default:
       break
     }
     
-    present(DetailsScreen.Assembly.createModule(with: DetailsScreenViewModel(state: snapshot)), animated: true, completion: nil)
-  }
+    present(DetailsScreen.Assembly.createModule(with: DetailsScreenViewModel(article: article!)), animated: true, completion: nil)  }
 }

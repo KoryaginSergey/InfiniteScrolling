@@ -60,17 +60,17 @@ private extension DetailsScreenViewController {
                 self?.render(state)
             }).store(in: &subscriptions)
 
-        viewModel?.route
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] route in
-                self?.handleRoute(route)
-            }).store(in: &subscriptions)
-
-        viewModel?.viewAction
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] action in
-                self?.handleAction(action)
-            }).store(in: &subscriptions)
+//        viewModel?.route
+//            .receive(on: DispatchQueue.main)
+//            .sink(receiveValue: { [weak self] route in
+//                self?.handleRoute(route)
+//            }).store(in: &subscriptions)
+//
+//        viewModel?.viewAction
+//            .receive(on: DispatchQueue.main)
+//            .sink(receiveValue: { [weak self] action in
+//                self?.handleAction(action)
+//            }).store(in: &subscriptions)
     }
     
     func render(_ state: DetailsScreen.Models.ViewState) {
@@ -79,24 +79,24 @@ private extension DetailsScreenViewController {
             break
         case .loaded(state: let item)://обработать структуру, добавить данные на UI
           textView.text = item.content
-          detailsImageView.image = item.image
+          detailsImageView.sd_setImage(with: item.imageURL, placeholderImage: UIImage(named: "news1"), options: [], completed: nil)
           titleView?.state = item.titleViewState
             break
         }
     }
 
-    func handleAction(_ action: DetailsScreen.Models.ViewAction) {
-        switch action {
-            //show alert
-            //scrollToTop
-            // ...
-        }
-    }
-    
-    func handleRoute(_ route: DetailsScreen.Models.ViewRoute) {
-        switch route {
-        }
-    }
+//    func handleAction(_ action: DetailsScreen.Models.ViewAction) {
+//        switch action {
+//            //show alert
+//            //scrollToTop
+//            // ...
+//        }
+//    }
+//
+//    func handleRoute(_ route: DetailsScreen.Models.ViewRoute) {
+//        switch route {
+//        }
+//    }
 }
 
 // MARK: - Private

@@ -17,6 +17,9 @@ protocol MainScreenViewModelProtocol: AnyObject {
   var viewAction: AnyPublisher<MainScreen.Models.ViewAction, Never> { get }
   var route: AnyPublisher<MainScreen.Models.ViewRoute, Never> { get }
   
+  var topItems:[Article] { get }
+  var bottomItems:[Article] { get }
+  
   func process(input: MainScreen.Models.ViewModelInput)
 }
 
@@ -26,18 +29,16 @@ final class MainScreenViewModel {
   //    @Injected(container: .shared)
   //    private var hapticService: HapticFeedbackServiceProtocol
   
-  ///
-  
   private let viewStateSubj = CurrentValueSubject<MainScreen.Models.ViewState, Never>(.idle)
   private let viewActionSubj = PassthroughSubject<MainScreen.Models.ViewAction, Never>()
   private let routeSubj = PassthroughSubject<MainScreen.Models.ViewRoute, Never>()
   
   private var subscriptions = Set<AnyCancellable>()
- 
+  
   var page = Page(size: 10, page: 1)
   
-  private var topItems:[Article] = []
-  private var bottomItems:[Article] = []
+  var topItems:[Article] = []
+  var bottomItems:[Article] = []
 }
 
 // MARK: - MainScreenViewModelProtocol
@@ -57,10 +58,14 @@ extension MainScreenViewModel: MainScreenViewModelProtocol {
 // MARK: - Private
 private extension MainScreenViewModel {
   
-  func setImage(urlToImage: URL) -> UIImageView {
-    var image: UIImageView?
-    image?.sd_setImage(with: urlToImage, placeholderImage: UIImage(named: "sport"))
-    return image!
+  func convertToDate(from originalDate: String) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+    dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+    let date = dateFormatter.date(from: originalDate)
+    dateFormatter.dateFormat = "MMM dd, yyyy"
+    let valueDate = dateFormatter.string(from: date!)
+    return valueDate
   }
   
   func fetch() {
@@ -76,14 +81,11 @@ private extension MainScreenViewModel {
           return
         }
         self?.topItems = articles
-        
-      print(data)
       case let .failure(error):
-      print(error)
+        print(error)
       }
       group.leave()
     }
-    
     group.enter()
     PostServices.shared.getBottomPosts(page: page) { [weak self] (result) in
       switch result {
@@ -93,50 +95,25 @@ private extension MainScreenViewModel {
         }
         self?.bottomItems = articles
       case let .failure(error):
-      print(error)
+        print(error)
       }
       group.leave()
     }
     
     group.notify(queue: DispatchQueue.main) { [weak self] in
       let itemsTop = self?.topItems.map({ (article) -> MainScreen.Models.Item in
-//        let image = UIImage()
-//        return .topItem(state: .init(titleViewState: .init(title: article.title ?? "", source: article.source?.name ?? "", date: article.publishedAt ?? ""), image: setImage(urlToImage: article.urlToImage!)))
-//      })
-      
-      return .topItem(state: .init(titleViewState: .init(title: article.title ?? "", source: article.source?.name ?? "", date: article.publishedAt ?? ""), image: UIImage(named: "sport")))
-    })
+//        guard let articleTitle = article.title,
+//              let articleSourceName = article.source?.name,
+//              let articlePublishedAt = article.publishedAt else {return}
+        return .topItem(state: .init(titleViewState: .init(title: article.title ?? "", source: article.source?.name ?? "", date: self!.convertToDate(from: article.publishedAt!)), imageURL: article.urlToImage ?? URL(string: "news1")))
+      })
       let itemsBottom = self?.bottomItems.map({ (article) -> MainScreen.Models.Item in
-        return .bottomItem(state: .init(titleViewState: .init(title: article.title ?? "", source: article.source?.name ?? "", date: article.publishedAt ?? ""), image: UIImage(named: "sport")))
+        return .bottomItem(state: .init(titleViewState: .init(title: article.title ?? "", source: article.source?.name ?? "", date: self!.convertToDate(from: article.publishedAt!)), imageURL: article.urlToImage ?? URL(string: "news1")))
       })
       
       self?.viewStateSubj.send(.loaded(sections: [.init(items: itemsTop ?? []),
                                                   .init(items: itemsBottom ?? []) ]))
     }
-    
-//    viewStateSubj.send(.loaded(sections: [
-//      .init(items: [
-//        .topItem(state: .init(titleViewState: .init(title: "Trevon Diggs lead Dallas Cowboys to defeat of Philadelphia Eagles on MNF - USA TODAY", source: "SPORTS", date: "March 12, 2019"), image: UIImage(named: "sport"))),
-//        .topItem(state: .init(titleViewState: .init(title: "Dallas Cowboys to defeat of Philadelphia Eagles on MNF - USA TODAY", source: "GAMES", date: "March 12, 2019"), image: UIImage(named: "nintendo"))),
-//        .topItem(state: .init(titleViewState: .init(title: "Philadelphia Eagles on MNF - USA TODAY", source: "POLITICS", date: "March 12, 2019"), image: UIImage(named: "politic"))),
-//        .topItem(state: .init(titleViewState: .init(title: "Cowboys to defeat of Philadelphia Eagles on MNF - USA TODAY", source: "BUSINESS", date: "March 12, 2019"), image: UIImage(named: "qovery")))
-//      ]),
-//      .init(items: [
-//        .bottomItem(state: .init(titleViewState: .init(title: "Philadelphia Eagles on MNF - USA TODAY", source: "POLITICS", date: "March 12, 2019"), image: UIImage(named: "qovery"))),
-//        .bottomItem(state: .init(titleViewState: .init(title: "Cowboys to defeat of Philadelphia Eagles on MNF", source: "BUSINESS", date: "March 12, 2019"), image: UIImage(named: "politic"))),
-//        .bottomItem(state: .init(titleViewState: .init(title: "Dallas Cowboys to defeat of Philadelphia Eagles on MNF - USA TODAY", source: "SPORT", date: "March 12, 2019"), image: UIImage(named: "nintendo"))),
-//        .bottomItem(state: .init(titleViewState: .init(title: "Dak Prescott, Ezekiel Elliott, Trevon Diggs lead Dallas Cowboys to defeat of Philadelphia Eagles on MNF - USA TODAY", source: "SPORT", date: "March 12, 2019"), image: UIImage(named: "swanTeam"))),
-//        .bottomItem(state: .init(titleViewState: .init(title: "Philadelphia Eagles on MNF - USA TODAY", source: "SPORT", date: "March 12, 2019"), image: UIImage(named: "qovery"))),
-//        .bottomItem(state: .init(titleViewState: .init(title: "MNF - USA TODAY", source: "BUSINESS", date: "March 12, 2019"), image: UIImage(named: "politic"))),
-//        .bottomItem(state: .init(titleViewState: .init(title: "Dallas Cowboys to defeat of Philadelphia Eagles on MNF - USA TODAY", source: "SPORT", date: "March 12, 2019"), image: UIImage(named: "nintendo"))),
-//        .bottomItem(state: .init(titleViewState: .init(title: "Philadelphia Eagles on MNF - USA TODAY", source: "SPORT", date: "March 12, 2019"), image: UIImage(named: "swanTeam"))),
-//        .bottomItem(state: .init(titleViewState: .init(title: "Cowboys to defeat of Philadelphia Eagles on MNF - USA TODAY", source: "SPORT", date: "March 12, 2019"), image: UIImage(named: "qovery"))),
-//        .bottomItem(state: .init(titleViewState: .init(title: "Ezekiel Elliott, Trevon Diggs lead Dallas Cowboys to defeat of Philadelphia Eagles on MNF - USA TODAY", source: "POLITICS", date: "March 12, 2019"), image: UIImage(named: "politic"))),
-//        .bottomItem(state: .init(titleViewState: .init(title: "Dallas Cowboys to defeat of Philadelphia Eagles on MNF - USA TODAY", source: "GAMES", date: "March 12, 2019"), image: UIImage(named: "nintendo"))),
-//        .bottomItem(state: .init(titleViewState: .init(title: "Dak Prescott, Ezekiel Elliott, Trevon Diggs lead Dallas Cowboys to defeat of Philadelphia Eagles on MNF - USA TODAY", source: "SPORT", date: "March 12, 2019"), image: UIImage(named: "swanTeam")))
-//      ])
-//    ]))
-    
     
     //        service.fetch.sink { [weak self] result in
     //            guard let self = self else { return }

@@ -43,7 +43,7 @@ extension DetailsScreen.Models {
   struct State {
     let id = UUID().hashValue
     let titleViewState: TitleView.State
-    let image: UIImage?
+    let imageURL: URL?
     let content: String?
   }
   
@@ -60,6 +60,6 @@ extension DetailsScreen.Models {
 
 extension DetailsScreen.Models.State: Hashable {
   static func == (lhs: DetailsScreen.Models.State, rhs: DetailsScreen.Models.State) -> Bool {
-    return lhs.id == rhs.id && lhs.image == rhs.image && lhs.titleViewState == rhs.titleViewState && lhs.content == rhs.content
+    return lhs.id == rhs.id && lhs.imageURL == rhs.imageURL && lhs.titleViewState == rhs.titleViewState && lhs.content == rhs.content
   }
 }
