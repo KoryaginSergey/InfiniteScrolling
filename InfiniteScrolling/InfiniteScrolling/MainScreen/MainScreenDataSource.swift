@@ -8,72 +8,53 @@
 
 import UIKit
 
+
 final class MainScreenDataSource {
   
-  // TODO: remove typealias or DataSource class from this file
   fileprivate typealias DataSource = UICollectionViewDiffableDataSource<MainScreen.Models.Section, MainScreen.Models.Item>
   private typealias Snapshot = NSDiffableDataSourceSnapshot<MainScreen.Models.Section, MainScreen.Models.Item>
   
   // MARK: - Properties
+  
   private let collectionView: UICollectionView
   private lazy var dataSource = makeDataSource()
   
   // MARK: - Initializators
+  
   init(collectionView: UICollectionView) {
-    //    self.collectionView = collectionView
-    //    collectionView.collectionViewLayout = makeLayout()
-    //    collectionView.dataSource = dataSource
-    //    registerReusable(in: collectionView)
-    
-    
     self.collectionView = collectionView
     registerReusable(in: collectionView)
     collectionView.collectionViewLayout = makeLayout()
     collectionView.dataSource = dataSource
-//    collectionView.reloadData()
-    
-    
-    
-    
   }
-  
   func getItem(indexPath: IndexPath) -> MainScreen.Models.Item? {
     return dataSource.itemIdentifier(for: indexPath)
   }
   
   // MARK: - Interface
+  
   func updateSnapshot(_ sections: [MainScreen.Models.Section], animated: Bool = true) {
     var snapshot = Snapshot()
     snapshot.appendSections(sections)
     sections.forEach {
       snapshot.appendItems($0.items, toSection: $0)
     }
-    dataSource.apply(snapshot, animatingDifferences: animated)
+    dataSource.apply(snapshot, animatingDifferences: false)
   }
 }
 
-//func updateSnapshot(_ sections: [BSDashboard.Models.Section], animated: Bool = true) {
-//       var snapshot = Snapshot()
-//
-//       snapshot.appendSections(sections)
-//       sections.forEach {
-//           snapshot.appendItems($0.items, toSection: $0)
-//       }
-//
-//       dataSource.apply(snapshot, animatingDifferences: animated)
-//   }
-
 // MARK: - Private
+
 private extension MainScreenDataSource {
   
   func registerReusable(in collectionView: UICollectionView) {
     collectionView.register(cellType: TopCollectionViewCell.self)
     collectionView.register(cellType: BottomCollectionViewCell.self)
-    //        collectionView.register(supplementaryViewType: MySectionView.self, ofKind: MySectionView.reuseIdentifier)
   }
 }
 
 // MARK: - DataSource
+
 private extension MainScreenDataSource {
   
   func makeDataSource() -> DataSource {
@@ -90,21 +71,10 @@ private extension MainScreenDataSource {
       }
     }
   }
-  
-  //    func makeSupplementaryProvider() {
-  //        dataSource.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
-  //            return nil
-  ////            guard let self = self else { return  nil }
-  ////
-  ////            let section = self.dataSource.snapshot().sectionIdentifiers[indexPath.section]
-  ////            switch section {
-  ////
-  ////            }
-  //        }
-  //    }
 }
 
 // MARK: - Layout
+
 private extension MainScreenDataSource {
   
   func makeLayout() -> UICollectionViewCompositionalLayout {
@@ -144,13 +114,7 @@ private extension MainScreenDataSource {
 }
 
 // MARK: - DataSource class
-//private extension MainScreenDataSource {
-//
-//    final class DataSource: UICollectionViewDiffableDataSource<MainScreen.Models.Section, MainScreen.Models.Item>,
-//                            SkeletonCollectionViewDataSource {
-//
-//        func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
-//
-//        }
-//    }
-//}
+
+private extension MainScreenDataSource {
+  
+}

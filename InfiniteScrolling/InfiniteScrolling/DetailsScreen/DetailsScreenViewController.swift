@@ -9,8 +9,8 @@
 import UIKit
 import Combine
 
+
 final class DetailsScreenViewController: UIViewController, StoryboardBased {
-  
   
   @IBOutlet private weak var topView: UIView!
   @IBOutlet private weak var bottomView: UIView!
@@ -20,109 +20,85 @@ final class DetailsScreenViewController: UIViewController, StoryboardBased {
   
   private var titleView: TitleView?
   
-
-    // MARK: - Properties
-    private var viewModel: DetailsScreenViewModelProtocol?
-    private let onLoad = PassthroughSubject<Void, Never>()
-
-    public var subscriptions = Set<AnyCancellable>()
-    
-    // MARK: - Lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setup()
-        bind(to: viewModel)
-        onLoad.send(())
-    }
+  // MARK: - Properties
+  
+  private var viewModel: DetailsScreenViewModelProtocol?
+  private let onLoad = PassthroughSubject<Void, Never>()
+  
+  public var subscriptions = Set<AnyCancellable>()
+  
+  // MARK: - Lifecycle
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setup()
+    bind(to: viewModel)
+    onLoad.send(())
+  }
 }
 
 // MARK: - Internal methods
-extension DetailsScreenViewController {
 
-    func setDependencies(viewModel: DetailsScreenViewModelProtocol) {
-        self.viewModel = viewModel
-    }
+extension DetailsScreenViewController {
+  
+  func setDependencies(viewModel: DetailsScreenViewModelProtocol) {
+    self.viewModel = viewModel
+  }
 }
 
 // MARK: - Bind
+
 private extension DetailsScreenViewController {
-    func bind(to viewModel: DetailsScreenViewModelProtocol?) {
-        subscriptions.forEach { $0.cancel() }
-        subscriptions.removeAll()
-        
-        let input = DetailsScreen.Models.ViewModelInput(onLoad: onLoad.eraseToAnyPublisher())
-        viewModel?.process(input: input)
-        
-        viewModel?.viewState
-            .removeDuplicates()
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] state in
-                self?.render(state)
-            }).store(in: &subscriptions)
-
-//        viewModel?.route
-//            .receive(on: DispatchQueue.main)
-//            .sink(receiveValue: { [weak self] route in
-//                self?.handleRoute(route)
-//            }).store(in: &subscriptions)
-//
-//        viewModel?.viewAction
-//            .receive(on: DispatchQueue.main)
-//            .sink(receiveValue: { [weak self] action in
-//                self?.handleAction(action)
-//            }).store(in: &subscriptions)
+  func bind(to viewModel: DetailsScreenViewModelProtocol?) {
+    subscriptions.forEach { $0.cancel() }
+    subscriptions.removeAll()
+    let input = DetailsScreen.Models.ViewModelInput(onLoad: onLoad.eraseToAnyPublisher())
+    viewModel?.process(input: input)
+    viewModel?.viewState
+      .removeDuplicates()
+      .receive(on: DispatchQueue.main)
+      .sink(receiveValue: { [weak self] state in
+        self?.render(state)
+      }).store(in: &subscriptions)
+  }
+  
+  func render(_ state: DetailsScreen.Models.ViewState) {
+    switch state {
+    case .idle:
+      break
+    case .loaded(state: let item)://обработать структуру, добавить данные на UI
+      textView.text = item.content
+      detailsImageView.sd_setImage(with: item.imageURL, placeholderImage: UIImage(named: "news1"), options: [], completed: nil)
+      titleView?.state = item.titleViewState
+      break
     }
-    
-    func render(_ state: DetailsScreen.Models.ViewState) {
-        switch state {
-        case .idle:
-            break
-        case .loaded(state: let item)://обработать структуру, добавить данные на UI
-          textView.text = item.content
-          detailsImageView.sd_setImage(with: item.imageURL, placeholderImage: UIImage(named: "news1"), options: [], completed: nil)
-          titleView?.state = item.titleViewState
-            break
-        }
-    }
-
-//    func handleAction(_ action: DetailsScreen.Models.ViewAction) {
-//        switch action {
-//            //show alert
-//            //scrollToTop
-//            // ...
-//        }
-//    }
-//
-//    func handleRoute(_ route: DetailsScreen.Models.ViewRoute) {
-//        switch route {
-//        }
-//    }
+  }
 }
 
 // MARK: - Private
-private extension DetailsScreenViewController {
 
-    func setup() {
-      let titleView = TitleView.loadFromNib()
-      
-      viewForTitleView.addSubview(titleView)
-      titleView.translatesAutoresizingMaskIntoConstraints = false
-      NSLayoutConstraint.activate([
-        titleView.topAnchor.constraint(equalTo: viewForTitleView.topAnchor),
-        titleView.bottomAnchor.constraint(equalTo: viewForTitleView.bottomAnchor),
-        titleView.leftAnchor.constraint(equalTo: viewForTitleView.leftAnchor),
-        titleView.rightAnchor.constraint(equalTo: viewForTitleView.rightAnchor)
-      ])
-      self.titleView = titleView
-      topView.layer.cornerRadius = 45
-      topView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-      bottomView.layer.cornerRadius = 45
-      bottomView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-    }
-    
-    func startLoading() {
-    }
-    
-    func stopLoading() {
-    }
+private extension DetailsScreenViewController {
+  
+  func setup() {
+    let titleView = TitleView.loadFromNib()
+    viewForTitleView.addSubview(titleView)
+    titleView.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      titleView.topAnchor.constraint(equalTo: viewForTitleView.topAnchor),
+      titleView.bottomAnchor.constraint(equalTo: viewForTitleView.bottomAnchor),
+      titleView.leftAnchor.constraint(equalTo: viewForTitleView.leftAnchor),
+      titleView.rightAnchor.constraint(equalTo: viewForTitleView.rightAnchor)
+    ])
+    self.titleView = titleView
+    topView.layer.cornerRadius = 45
+    topView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+    bottomView.layer.cornerRadius = 45
+    bottomView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+  }
+  
+  func startLoading() {
+  }
+  
+  func stopLoading() {
+  }
 }

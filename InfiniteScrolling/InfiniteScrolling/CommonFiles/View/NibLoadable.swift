@@ -36,7 +36,7 @@ public extension NibLoadable {
 public extension NibLoadable where Self: UIView {
   /**
    Returns a `UIView` object instantiated from nib
-
+   
    - returns: A `NibLoadable`, `UIView` instance
    */
   static func loadFromNib() -> Self {

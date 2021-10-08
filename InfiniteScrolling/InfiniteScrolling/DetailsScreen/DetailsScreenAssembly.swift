@@ -8,14 +8,15 @@
 
 import UIKit
 
+
 extension DetailsScreen {
-    enum Assembly {}
+  enum Assembly {}
 }
 
 extension DetailsScreen.Assembly {
-    static func createModule(with viewModel: DetailsScreenViewModelProtocol) -> UIViewController {
-        let viewController = DetailsScreenViewController.instantiate()
-        viewController.setDependencies(viewModel: viewModel)
-        return viewController
-    }
+  static func createModule(with viewModel: DetailsScreenViewModelProtocol) -> UIViewController {
+    let viewController = DetailsScreenViewController.instantiate()
+    viewController.setDependencies(viewModel: viewModel)
+    return viewController
+  }
 }

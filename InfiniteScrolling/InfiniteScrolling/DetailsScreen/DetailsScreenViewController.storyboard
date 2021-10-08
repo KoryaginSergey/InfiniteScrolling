@@ -17,13 +17,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cki-Zk-rzB">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="848"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mkR-Xp-Qcz">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="409"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="424"/>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zuS-fk-5rF">
-                                        <rect key="frame" x="0.0" y="286.5" width="414" height="531.5"/>
+                                        <rect key="frame" x="0.0" y="297" width="414" height="551"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="of4-jo-4ST">
                                                 <rect key="frame" x="10" y="20" width="394" height="130"/>
@@ -33,7 +33,7 @@
                                                 </constraints>
                                             </view>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="3z6-OE-fug">
-                                                <rect key="frame" x="20" y="150" width="374" height="381.5"/>
+                                                <rect key="frame" x="20" y="150" width="374" height="371"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
@@ -47,7 +47,7 @@
                                             <constraint firstItem="of4-jo-4ST" firstAttribute="top" secondItem="zuS-fk-5rF" secondAttribute="top" constant="20" id="JgM-rx-OqT"/>
                                             <constraint firstItem="3z6-OE-fug" firstAttribute="leading" secondItem="zuS-fk-5rF" secondAttribute="leading" constant="20" id="NOH-ic-mWH"/>
                                             <constraint firstItem="3z6-OE-fug" firstAttribute="top" secondItem="of4-jo-4ST" secondAttribute="bottom" id="RjL-L9-8MC"/>
-                                            <constraint firstAttribute="bottom" secondItem="3z6-OE-fug" secondAttribute="bottom" id="jus-mX-BPK"/>
+                                            <constraint firstAttribute="bottom" secondItem="3z6-OE-fug" secondAttribute="bottom" constant="30" id="jus-mX-BPK"/>
                                             <constraint firstAttribute="trailing" secondItem="3z6-OE-fug" secondAttribute="trailing" constant="20" id="v1O-6x-wgn"/>
                                         </constraints>
                                     </view>
@@ -70,7 +70,7 @@
                         <constraints>
                             <constraint firstItem="Cki-Zk-rzB" firstAttribute="top" secondItem="RHd-L1-Oo9" secondAttribute="top" id="0jP-af-q2m"/>
                             <constraint firstItem="RHd-L1-Oo9" firstAttribute="trailing" secondItem="Cki-Zk-rzB" secondAttribute="trailing" id="GdS-bZ-Cid"/>
-                            <constraint firstItem="RHd-L1-Oo9" firstAttribute="bottom" secondItem="Cki-Zk-rzB" secondAttribute="bottom" id="K2A-Xj-RBp"/>
+                            <constraint firstItem="RHd-L1-Oo9" firstAttribute="bottom" secondItem="Cki-Zk-rzB" secondAttribute="bottom" constant="-30" id="K2A-Xj-RBp"/>
                             <constraint firstItem="Cki-Zk-rzB" firstAttribute="leading" secondItem="RHd-L1-Oo9" secondAttribute="leading" id="zqS-S6-sYe"/>
                         </constraints>
                     </view>
@@ -84,7 +84,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SPs-1e-mb8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-884" y="87"/>
+            <point key="canvasLocation" x="-1412" y="117"/>
         </scene>
     </scenes>
     <resources>

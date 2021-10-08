@@ -14,7 +14,6 @@ final class TopCollectionViewCell: UICollectionViewCell, NibReusable {
     struct TopView {
       static let cornerRadius: CGFloat = 15
     }
-    
     struct TitleView {
       static let cornerRadius: CGFloat = 15
     }
@@ -27,6 +26,7 @@ final class TopCollectionViewCell: UICollectionViewCell, NibReusable {
   private var titleView: TitleView?
   
   // MARK: - Properties
+  
   var state: MainScreen.Models.State? {
     didSet {
       configure()
@@ -34,28 +34,15 @@ final class TopCollectionViewCell: UICollectionViewCell, NibReusable {
   }
   
   // MARK: - Lifecycle
+  
   override func awakeFromNib() {
     super.awakeFromNib()
     setupUI()
   }
-  
-  /*
-   override func layoutSubviews() {
-   super.layoutSubviews()
-   }
-   
-   override func prepareForReuse() {
-   super.prepareForReuse()
-   }
-   */
-}
-
-// MARK: - Internal methods
-extension TopCollectionViewCell {
-  
 }
 
 // MARK: - Private methods
+
 private extension TopCollectionViewCell {
   
   func setupUI() {
@@ -64,7 +51,6 @@ private extension TopCollectionViewCell {
     topCellView.clipsToBounds = true
     
     let titleView = TitleView.loadFromNib()
-    
     viewForTitleView.addSubview(titleView)
     titleView.translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
@@ -75,20 +61,12 @@ private extension TopCollectionViewCell {
     ])
     viewForTitleView.layer.cornerRadius = Defaults.TitleView.cornerRadius
     viewForTitleView.clipsToBounds = true
-    
     self.titleView = titleView
   }
   
   func configure() {
     topCellImageView.sd_setImage(with: state?.imageURL, placeholderImage: UIImage(named: "news1"), options: [], completed: nil)
     titleView?.state = state?.titleViewState
-//    state?.completionHandler()
   }
 }
 
- // MARK: - TopCollectionViewCell.State + Hashable
-//extension TopCollectionViewCell.State: Hashable {
-//  static func == (lhs: TopCollectionViewCell.State, rhs: TopCollectionViewCell.State) -> Bool {
-//    return lhs.id == rhs.id && lhs.image == rhs.image && lhs.titleViewState == rhs.titleViewState
-//  }
-//}

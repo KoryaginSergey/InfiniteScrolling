@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 struct HTTPNetworkResponse {
   
   // Properly checks and handles the status code of the response
@@ -22,5 +23,4 @@ struct HTTPNetworkResponse {
     default: return .failure(HTTPNetworkError.failed)
     }
   }
-  
 }

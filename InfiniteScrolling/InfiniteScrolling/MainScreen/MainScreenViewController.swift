@@ -9,20 +9,21 @@
 import UIKit
 import Combine
 
+
 final class MainScreenViewController: UIViewController, StoryboardBased {
   
   // MARK: - Properties
+  
   @IBOutlet private weak var collectionView: UICollectionView!
   @IBOutlet private weak var titleLabel: UILabel!
   
   private lazy var dataSource = MainScreenDataSource(collectionView: collectionView)
   private var viewModel: MainScreenViewModelProtocol?
   private let onLoad = PassthroughSubject<Void, Never>()
-  
   public var subscriptions = Set<AnyCancellable>()
   
-      
   // MARK: - Lifecycle
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
@@ -33,6 +34,7 @@ final class MainScreenViewController: UIViewController, StoryboardBased {
 }
 
 // MARK: - Internal methods
+
 extension MainScreenViewController {
   
   func setDependencies(viewModel: MainScreenViewModelProtocol) {
@@ -41,32 +43,19 @@ extension MainScreenViewController {
 }
 
 // MARK: - Bind
+
 private extension MainScreenViewController {
   func bind(to viewModel: MainScreenViewModelProtocol?) {
     subscriptions.forEach { $0.cancel() }
     subscriptions.removeAll()
-    
     let input = MainScreen.Models.ViewModelInput(onLoad: onLoad.eraseToAnyPublisher())
     viewModel?.process(input: input)
-    
     viewModel?.viewState
       .removeDuplicates()
       .receive(on: DispatchQueue.main)
       .sink(receiveValue: { [weak self] state in
         self?.render(state)
       }).store(in: &subscriptions)
-    
-//    viewModel?.route
-//      .receive(on: DispatchQueue.main)
-//      .sink(receiveValue: { [weak self] route in
-//        self?.handleRoute(route)
-//      }).store(in: &subscriptions)
-    
-//    viewModel?.viewAction
-//      .receive(on: DispatchQueue.main)
-//      .sink(receiveValue: { [weak self] action in
-//        self?.handleAction(action)
-//      }).store(in: &subscriptions)
   }
   
   func render(_ state: MainScreen.Models.ViewState) {
@@ -76,34 +65,18 @@ private extension MainScreenViewController {
     case .loading:
       startLoading()
     case .loaded(sections: let section):
-        self.updateSnapshot(section)
+      self.updateSnapshot(section)
       collectionView.reloadData()
-    //            stopLoading()
     case .empty:
       stopLoading()
     case .failure:
       stopLoading()
     }
   }
-  
-//  func handleAction(_ action: MainScreen.Models.ViewAction) {
-//    switch action {
-//    //show alert
-//    //scrollToTop
-//    // ...
-//    }
-//  }
-  
-//  func handleRoute(_ route: MainScreen.Models.ViewRoute) {
-//    switch route {
-//    case .dismiss:
-//      break
-//    //          dismiss(animated: true, completion: nil)
-//    }
-//  }
 }
 
-// MARK: - DataSourc
+// MARK: - DataSource
+
 private extension MainScreenViewController {
   
   func updateSnapshot(_ sections: [MainScreen.Models.Section], animated: Bool = true) {
@@ -111,23 +84,15 @@ private extension MainScreenViewController {
   }
 }
 
-// MARK: - Private
-private extension MainScreenViewController {
-  
-  func setup() {
-  }
-  
-  func startLoading() {
-  }
-  
-  func stopLoading() {
-  }
-}
+// MARK: - Delegate
 
 extension MainScreenViewController: UICollectionViewDelegate {
+  
+  func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    viewModel?.retrieveNewData(at: indexPath)
+  }
+  
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-    
     var article: Article?
     switch indexPath.section {
     case 0:
@@ -140,3 +105,19 @@ extension MainScreenViewController: UICollectionViewDelegate {
     
     present(DetailsScreen.Assembly.createModule(with: DetailsScreenViewModel(article: article!)), animated: true, completion: nil)  }
 }
+
+// MARK: - Private
+
+private extension MainScreenViewController {
+  
+  func setup() {
+  }
+  
+  func startLoading() {
+  }
+  
+  func stopLoading() {
+  }
+}
+
+
