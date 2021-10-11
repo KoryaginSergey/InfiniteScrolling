@@ -28,8 +28,8 @@ final class MainScreenViewModel {
   private let viewStateSubj = CurrentValueSubject<MainScreen.Models.ViewState, Never>(.idle)
   private var subscriptions = Set<AnyCancellable>()
   
-  var topPage = Page(size: 3, page: 1)
-  var bottomPage = Page(size: 3, page: 1)
+  var topPage = Page(size: 10, page: 1)
+  var bottomPage = Page(size: 10, page: 1)
   
   var isTopLoading: Bool = false
   var isBottomLoading: Bool = false
@@ -104,8 +104,8 @@ private extension MainScreenViewModel {
     let itemsBottom = self.bottomItems.map({ (article) -> MainScreen.Models.Item in
       return .bottomItem(state: .init(titleViewState: .init(title: article.title, source: article.source?.name, date: article.publishedAt?.mmm_dd_yyyy()), imageURL: article.urlToImage))
     })
-    self.viewStateSubj.send(.loaded(sections: [.init(items: itemsTop),
-                                               .init(items: itemsBottom) ]))
+    self.viewStateSubj.send(.loaded(sections: [.init(id: 0, items: itemsTop),
+                                               .init(id: 1, items: itemsBottom) ]))
   }
   
   func fetchTopItems(closure: (()->Void)?) {

@@ -49,7 +49,7 @@ extension MainScreen.Models {
   }
   
   struct Section: Hashable {
-    let id = UUID().hashValue
+    let id: Int
     let items: [Item]
   }
   

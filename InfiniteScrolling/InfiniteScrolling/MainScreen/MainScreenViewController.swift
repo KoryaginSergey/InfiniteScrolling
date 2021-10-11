@@ -66,7 +66,6 @@ private extension MainScreenViewController {
       startLoading()
     case .loaded(sections: let section):
       self.updateSnapshot(section)
-      collectionView.reloadData()
     case .empty:
       stopLoading()
     case .failure:
