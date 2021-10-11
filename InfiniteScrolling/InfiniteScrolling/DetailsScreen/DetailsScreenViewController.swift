@@ -40,7 +40,6 @@ final class DetailsScreenViewController: UIViewController, StoryboardBased {
 // MARK: - Internal methods
 
 extension DetailsScreenViewController {
-  
   func setDependencies(viewModel: DetailsScreenViewModelProtocol) {
     self.viewModel = viewModel
   }
@@ -66,9 +65,11 @@ private extension DetailsScreenViewController {
     switch state {
     case .idle:
       break
-    case .loaded(state: let item)://обработать структуру, добавить данные на UI
+    case .loaded(state: let item):
       textView.text = item.content
-      detailsImageView.sd_setImage(with: item.imageURL, placeholderImage: UIImage(named: "news1"), options: [], completed: nil)
+      detailsImageView.sd_setImage(with: item.imageURL,
+                                   placeholderImage: Article.Defaults.articlePlaceholder,
+                                   options: [], completed: nil)
       titleView?.state = item.titleViewState
       break
     }
@@ -78,7 +79,6 @@ private extension DetailsScreenViewController {
 // MARK: - Private
 
 private extension DetailsScreenViewController {
-  
   func setup() {
     let titleView = TitleView.loadFromNib()
     viewForTitleView.addSubview(titleView)
@@ -94,11 +94,5 @@ private extension DetailsScreenViewController {
     topView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     bottomView.layer.cornerRadius = 45
     bottomView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-  }
-  
-  func startLoading() {
-  }
-  
-  func stopLoading() {
   }
 }

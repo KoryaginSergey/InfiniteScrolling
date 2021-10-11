@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 
 public struct ModelArticle: Codable {
@@ -28,4 +29,10 @@ public struct Article: Codable {
 public struct Source: Codable {
   let id: String?
   let name: String?
+}
+
+public extension Article {
+  struct Defaults {
+    static let articlePlaceholder: UIImage? = UIImage(named: "news1")
+  }
 }

@@ -44,7 +44,6 @@ final class TopCollectionViewCell: UICollectionViewCell, NibReusable {
 // MARK: - Private methods
 
 private extension TopCollectionViewCell {
-  
   func setupUI() {
     topCellView.layer.cornerRadius = Defaults.TopView.cornerRadius
     topCellImageView.contentMode = .scaleAspectFill
@@ -65,7 +64,7 @@ private extension TopCollectionViewCell {
   }
   
   func configure() {
-    topCellImageView.sd_setImage(with: state?.imageURL, placeholderImage: UIImage(named: "news1"), options: [], completed: nil)
+    topCellImageView.sd_setImage(with: state?.imageURL, placeholderImage: Article.Defaults.articlePlaceholder, options: [], completed: nil)
     titleView?.state = state?.titleViewState
   }
 }

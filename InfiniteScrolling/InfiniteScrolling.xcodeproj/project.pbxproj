@@ -115,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				6336150E26FC5EFF006B3688 /* TitleView.swift */,
+				6336150F26FC5EFF006B3688 /* TitleView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -126,7 +127,6 @@
 				6336151B26FC76E1006B3688 /* DetailsScreenAssembly.swift */,
 				6336151C26FC76E1006B3688 /* DetailsScreenViewModel.swift */,
 				6336151A26FC76E1006B3688 /* DetailsScreenViewController.swift */,
-				6336150F26FC5EFF006B3688 /* TitleView.xib */,
 				6336151826FC76E1006B3688 /* DetailsScreenViewController.storyboard */,
 			);
 			path = DetailsScreen;

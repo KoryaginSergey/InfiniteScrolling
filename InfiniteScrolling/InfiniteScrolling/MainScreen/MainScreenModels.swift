@@ -31,17 +31,13 @@ extension MainScreen.Models {
   
   enum ViewState: Equatable {
     case idle
-    case loading
     case loaded(sections: [MainScreen.Models.Section])
-    case empty
-    case failure
   }
 }
 
 // MARK: - Scene Models
 
 extension MainScreen.Models {
-  
   struct State {
     let id = UUID().hashValue
     let titleViewState: TitleView.State?

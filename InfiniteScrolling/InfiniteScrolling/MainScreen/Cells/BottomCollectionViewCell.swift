@@ -40,11 +40,9 @@ final class BottomCollectionViewCell: UICollectionViewCell, NibReusable {
 // MARK: - Private methods
 
 private extension BottomCollectionViewCell {
-  
   func setupUI() {
     bottomCellImageView.layer.cornerRadius = Defaults.BottomImage.cornerRadius
     bottomCellImageView.contentMode = .scaleAspectFill
-    
     let titleView = TitleView.loadFromNib()
     viewForTitleView.addSubview(titleView)
     titleView.translatesAutoresizingMaskIntoConstraints = false
@@ -58,7 +56,7 @@ private extension BottomCollectionViewCell {
   }
   
   func configure() {
-    bottomCellImageView.sd_setImage(with: state?.imageURL, placeholderImage: UIImage(named: "news1"), options: [], completed: nil)
+    bottomCellImageView.sd_setImage(with: state?.imageURL, placeholderImage: Article.Defaults.articlePlaceholder, options: [], completed: nil)
     titleView?.state = state?.titleViewState
   }
 }

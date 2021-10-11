@@ -26,7 +26,6 @@ final class MainScreenViewController: UIViewController, StoryboardBased {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    setup()
     bind(to: viewModel)
     onLoad.send(())
     collectionView.delegate = self
@@ -36,7 +35,6 @@ final class MainScreenViewController: UIViewController, StoryboardBased {
 // MARK: - Internal methods
 
 extension MainScreenViewController {
-  
   func setDependencies(viewModel: MainScreenViewModelProtocol) {
     self.viewModel = viewModel
   }
@@ -62,14 +60,8 @@ private extension MainScreenViewController {
     switch state {
     case .idle:
       updateSnapshot([], animated: false)
-    case .loading:
-      startLoading()
     case .loaded(sections: let section):
       self.updateSnapshot(section)
-    case .empty:
-      stopLoading()
-    case .failure:
-      stopLoading()
     }
   }
 }
@@ -77,7 +69,6 @@ private extension MainScreenViewController {
 // MARK: - DataSource
 
 private extension MainScreenViewController {
-  
   func updateSnapshot(_ sections: [MainScreen.Models.Section], animated: Bool = true) {
     dataSource.updateSnapshot(sections, animated: animated)
   }
@@ -86,7 +77,6 @@ private extension MainScreenViewController {
 // MARK: - Delegate
 
 extension MainScreenViewController: UICollectionViewDelegate {
-  
   func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
     viewModel?.retrieveNewData(at: indexPath)
   }
@@ -107,20 +97,6 @@ extension MainScreenViewController: UICollectionViewDelegate {
     } else {
       present(WebScreen.Assembly.createModule(with: WebScreenViewModel(modelArticle: articleForTransmission)), animated: true, completion: nil)
     }
-  }
-}
-
-// MARK: - Private
-
-private extension MainScreenViewController {
-  
-  func setup() {
-  }
-  
-  func startLoading() {
-  }
-  
-  func stopLoading() {
   }
 }
 

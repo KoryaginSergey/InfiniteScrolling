@@ -13,7 +13,6 @@ import UIKit
 
 protocol DetailsScreenViewModelProtocol: AnyObject {
   var viewState: AnyPublisher<DetailsScreen.Models.ViewState, Never> { get }
-  
   func process(input: DetailsScreen.Models.ViewModelInput)
 }
 
@@ -33,7 +32,6 @@ final class DetailsScreenViewModel {
 // MARK: - DetailsScreenViewModelProtocol
 
 extension DetailsScreenViewModel: DetailsScreenViewModelProtocol {
-  
   var viewState: AnyPublisher<DetailsScreen.Models.ViewState, Never> { viewStateSubj.eraseToAnyPublisher() }
   
   func process(input: DetailsScreen.Models.ViewModelInput) {
@@ -46,7 +44,6 @@ extension DetailsScreenViewModel: DetailsScreenViewModelProtocol {
 // MARK: - Private
 
 private extension DetailsScreenViewModel {
-  
   func fetch() {
     let titleViewState = TitleView.State(title: article.title, source: article.source?.name, date: article.publishedAt?.mmmm_dd_yyyy())
     let state = DetailsScreen.Models.State(titleViewState: titleViewState, imageURL: article.urlToImage, content: article.content)

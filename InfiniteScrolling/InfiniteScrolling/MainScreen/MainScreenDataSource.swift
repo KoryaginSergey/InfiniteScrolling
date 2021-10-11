@@ -10,7 +10,6 @@ import UIKit
 
 
 final class MainScreenDataSource {
-  
   fileprivate typealias DataSource = UICollectionViewDiffableDataSource<MainScreen.Models.Section, MainScreen.Models.Item>
   private typealias Snapshot = NSDiffableDataSourceSnapshot<MainScreen.Models.Section, MainScreen.Models.Item>
   
@@ -27,6 +26,7 @@ final class MainScreenDataSource {
     collectionView.collectionViewLayout = makeLayout()
     collectionView.dataSource = dataSource
   }
+  
   func getItem(indexPath: IndexPath) -> MainScreen.Models.Item? {
     return dataSource.itemIdentifier(for: indexPath)
   }
@@ -46,7 +46,6 @@ final class MainScreenDataSource {
 // MARK: - Private
 
 private extension MainScreenDataSource {
-  
   func registerReusable(in collectionView: UICollectionView) {
     collectionView.register(cellType: TopCollectionViewCell.self)
     collectionView.register(cellType: BottomCollectionViewCell.self)
@@ -56,7 +55,6 @@ private extension MainScreenDataSource {
 // MARK: - DataSource
 
 private extension MainScreenDataSource {
-  
   func makeDataSource() -> DataSource {
     DataSource(collectionView: collectionView) { collectionView, indexPath, item -> UICollectionViewCell? in
       switch item {
@@ -76,7 +74,6 @@ private extension MainScreenDataSource {
 // MARK: - Layout
 
 private extension MainScreenDataSource {
-  
   func makeLayout() -> UICollectionViewCompositionalLayout {
     return UICollectionViewCompositionalLayout { [weak self] index, _ -> NSCollectionLayoutSection? in
       switch index  {
@@ -96,7 +93,6 @@ private extension MainScreenDataSource {
     group.contentInsets = .init(top: 20, leading: 10, bottom: 0, trailing: 2)
     let section = NSCollectionLayoutSection(group: group)
     section.orthogonalScrollingBehavior = .continuous
-    
     return section
   }
   
@@ -108,13 +104,6 @@ private extension MainScreenDataSource {
     let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
     group.contentInsets = .init(top: 20, leading: 10, bottom: 0, trailing: 0)
     let section = NSCollectionLayoutSection(group: group)
-    
     return section
   }
-}
-
-// MARK: - DataSource class
-
-private extension MainScreenDataSource {
-  
 }

@@ -12,7 +12,6 @@ import Combine
 
 protocol WebScreenViewModelProtocol: AnyObject {
   var viewState: AnyPublisher<WebScreen.Models.ViewState, Never> { get }
-  
   func process(input: WebScreen.Models.ViewModelInput)
 }
 
@@ -33,21 +32,20 @@ final class WebScreenViewModel {
 // MARK: - WebScreenViewModelProtocol
 
 extension WebScreenViewModel: WebScreenViewModelProtocol {
-  
   var viewState: AnyPublisher<WebScreen.Models.ViewState, Never> { viewStateSubj.eraseToAnyPublisher() }
   
   func process(input: WebScreen.Models.ViewModelInput) {
-            input.onLoad.sink { [weak self] _ in
-                self?.fetch()
-            }.store(in: &subscriptions)
+    input.onLoad.sink { [weak self] _ in
+      self?.fetch()
+    }.store(in: &subscriptions)
   }
 }
 
 // MARK: - Private
 
 private extension WebScreenViewModel {
-      func fetch() {
-        let state = WebScreen.Models.State(urlAddress: modelArticle.url)
-        viewStateSubj.send(.loaded(state: state))
-      }
+  func fetch() {
+    let state = WebScreen.Models.State(urlAddress: modelArticle.url)
+    viewStateSubj.send(.loaded(state: state))
+  }
 }

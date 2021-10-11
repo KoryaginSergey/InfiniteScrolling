@@ -11,8 +11,8 @@ import Foundation
 public typealias HTTPParameters = [String: Any]?
 public typealias HTTPHeaders = [String: Any]?
 
-let defaultParams: HTTPParameters = ["apiKey" : "97777613713c49a48689879ed89eaeb3"]
-//let defaultParams: HTTPParameters = ["apiKey" : "cda59155c15044a5adadfb5c96323dbe"]
+//let defaultParams: HTTPParameters = ["apiKey" : "97777613713c49a48689879ed89eaeb3"]
+let defaultParams: HTTPParameters = ["apiKey" : "cda59155c15044a5adadfb5c96323dbe"]
 
 
 struct HTTPNetworkRequest {

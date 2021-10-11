@@ -20,14 +20,12 @@ final class WebScreenViewController: UIViewController, StoryboardBased {
   
   private var viewModel: WebScreenViewModelProtocol?
   private let onLoad = PassthroughSubject<Void, Never>()
-  
   public var subscriptions = Set<AnyCancellable>()
   
   // MARK: - Lifecycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    setup()
     bind(to: viewModel)
     onLoad.send(())
   }
@@ -36,7 +34,6 @@ final class WebScreenViewController: UIViewController, StoryboardBased {
 // MARK: - Internal methods
 
 extension WebScreenViewController {
-  
   func setDependencies(viewModel: WebScreenViewModelProtocol) {
     self.viewModel = viewModel
   }
@@ -48,17 +45,14 @@ private extension WebScreenViewController {
   func bind(to viewModel: WebScreenViewModelProtocol?) {
     subscriptions.forEach { $0.cancel() }
     subscriptions.removeAll()
-    
     let input = WebScreen.Models.ViewModelInput(onLoad: onLoad.eraseToAnyPublisher())
     viewModel?.process(input: input)
-    
     viewModel?.viewState
       .removeDuplicates()
       .receive(on: DispatchQueue.main)
       .sink(receiveValue: { [weak self] state in
         self?.render(state)
       }).store(in: &subscriptions)
-    
   }
   
   func render(_ state: WebScreen.Models.ViewState) {
@@ -68,19 +62,5 @@ private extension WebScreenViewController {
     case .loaded(state: let item):
       webView.load(URLRequest(url: item.urlAddress!))
     }
-  }
-}
-
-// MARK: - Private
-
-private extension WebScreenViewController {
-  
-  func setup() {
-  }
-  
-  func startLoading() {
-  }
-  
-  func stopLoading() {
   }
 }

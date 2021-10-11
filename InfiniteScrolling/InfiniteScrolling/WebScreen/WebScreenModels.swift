@@ -37,7 +37,6 @@ extension WebScreen.Models {
 // MARK: - Scene Models
 
 extension WebScreen.Models {
-  
   struct State {
     let urlAddress: URL?
   }

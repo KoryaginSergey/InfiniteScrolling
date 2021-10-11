@@ -42,15 +42,9 @@ final class TitleView: UIView, NibLoadable {
   }
 }
 
-// MARK: - Internal methods
-
-extension TitleView {
-}
-
 // MARK: - Private methods
 
 private extension TitleView {
-  
   func setupUI() {
     sourceLabel.textColor = .systemBlue
   }

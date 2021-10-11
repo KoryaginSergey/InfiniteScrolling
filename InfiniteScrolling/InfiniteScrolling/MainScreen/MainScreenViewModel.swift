@@ -41,7 +41,6 @@ final class MainScreenViewModel {
 // MARK: - MainScreenViewModelProtocol
 
 extension MainScreenViewModel: MainScreenViewModelProtocol {
-  
   var viewState: AnyPublisher<MainScreen.Models.ViewState, Never> { viewStateSubj.eraseToAnyPublisher() }
   
   func process(input: MainScreen.Models.ViewModelInput) {
@@ -80,7 +79,6 @@ extension MainScreenViewModel {
 // MARK: - Private
 
 private extension MainScreenViewModel {
-  
   func fetch() {
     let group = DispatchGroup()
     group.enter()

@@ -21,13 +21,13 @@ extension DetailsScreen {
 
 extension DetailsScreen.Models {
   
-// MARK: Input
+  // MARK: Input
   
   struct ViewModelInput {
     let onLoad: AnyPublisher<Void, Never>
   }
   
-// MARK: Output
+  // MARK: Output
   
   enum ViewState: Equatable {
     case idle
@@ -38,7 +38,7 @@ extension DetailsScreen.Models {
 // MARK: - Scene Models
 
 extension DetailsScreen.Models {
-  
+
   struct State {
     let id = UUID().hashValue
     let titleViewState: TitleView.State
