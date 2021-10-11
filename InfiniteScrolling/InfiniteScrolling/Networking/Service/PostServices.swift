@@ -31,7 +31,7 @@ struct PostServices{
     
     do{
       params?.merge(page.getParameters() ?? [:]) {(current, _) in current}
-      let request = try HTTPNetworkRequest.configureHTTPRequest(from: .none, with: params, includes: .none, contains: nil, and: .get, endpoint: endPoint)
+      let request = try HTTPNetworkRequest.configureHTTPRequest(with: params, includes: .none, contains: nil, and: .get, endpoint: endPoint)
       postSession.dataTask(with: request) { (data, res, err) in
         if let response = res as? HTTPURLResponse, let unwrappedData = data {
           let result = HTTPNetworkResponse.handleNetworkResponse(for: response)
@@ -55,7 +55,7 @@ struct PostServices{
     
     do{
       params?.merge(page.getParameters() ?? [:]) {(current, _) in current}
-      let request = try HTTPNetworkRequest.configureHTTPRequest(from: .none, with: params, includes: .none, contains: nil, and: .get, endpoint: endPoint)
+      let request = try HTTPNetworkRequest.configureHTTPRequest(with: params, includes: .none, contains: nil, and: .get, endpoint: endPoint)
       postSession.dataTask(with: request) { (data, res, err) in
         if let response = res as? HTTPURLResponse, let unwrappedData = data {
           let result = HTTPNetworkResponse.handleNetworkResponse(for: response)

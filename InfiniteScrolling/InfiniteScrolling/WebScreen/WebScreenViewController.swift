@@ -8,9 +8,13 @@
 
 import UIKit
 import Combine
+import WebKit
 
 
 final class WebScreenViewController: UIViewController, StoryboardBased {
+  
+  @IBOutlet private weak var webView: WKWebView!
+  
   
   // MARK: - Properties
   
@@ -55,44 +59,14 @@ private extension WebScreenViewController {
         self?.render(state)
       }).store(in: &subscriptions)
     
-    viewModel?.route
-      .receive(on: DispatchQueue.main)
-      .sink(receiveValue: { [weak self] route in
-        self?.handleRoute(route)
-      }).store(in: &subscriptions)
-    
-    viewModel?.viewAction
-      .receive(on: DispatchQueue.main)
-      .sink(receiveValue: { [weak self] action in
-        self?.handleAction(action)
-      }).store(in: &subscriptions)
   }
   
   func render(_ state: WebScreen.Models.ViewState) {
     switch state {
     case .idle:
       break
-    case .loading:
-      startLoading()
-    case .loaded:
-      stopLoading()
-    case .empty:
-      stopLoading()
-    case .failure:
-      stopLoading()
-    }
-  }
-  
-  func handleAction(_ action: WebScreen.Models.ViewAction) {
-    switch action {
-    //show alert
-    //scrollToTop
-    // ...
-    }
-  }
-  
-  func handleRoute(_ route: WebScreen.Models.ViewRoute) {
-    switch route {
+    case .loaded(state: let item):
+      webView.load(URLRequest(url: item.urlAddress!))
     }
   }
 }

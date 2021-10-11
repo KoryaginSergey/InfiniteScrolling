@@ -30,28 +30,21 @@ extension WebScreen.Models {
   
   enum ViewState: Equatable {
     case idle
-    case loading
-    case loaded
-    case empty
-    case failure
-  }
-  
-  enum ViewAction {
-  }
-  
-  enum ViewRoute {
+    case loaded(state: WebScreen.Models.State)
   }
 }
 
 // MARK: - Scene Models
 
-//extension WebScreen.Models {
-//
-//    // MARK: List Models
-//    enum Section: Hashable {
-//        case main
-//    }
-//
-//    enum Item: Hashable {
-//    }
-//}
+extension WebScreen.Models {
+  
+  struct State {
+    let urlAddress: URL?
+  }
+}
+
+extension WebScreen.Models.State: Hashable {
+  static func == (lhs: WebScreen.Models.State, rhs: WebScreen.Models.State) -> Bool {
+    return lhs.urlAddress == rhs.urlAddress
+  }
+}

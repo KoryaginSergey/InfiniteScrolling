@@ -33,10 +33,13 @@
                             <constraint firstItem="RHd-L1-Oo9" firstAttribute="trailing" secondItem="NyJ-Hh-KEJ" secondAttribute="trailing" id="YG1-AH-sp3"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="webView" destination="NyJ-Hh-KEJ" id="QWR-8R-Fr8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SPs-1e-mb8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="470" y="165"/>
+            <point key="canvasLocation" x="-294" y="-16"/>
         </scene>
     </scenes>
 </document>

@@ -12,8 +12,6 @@ import Combine
 
 protocol WebScreenViewModelProtocol: AnyObject {
   var viewState: AnyPublisher<WebScreen.Models.ViewState, Never> { get }
-  var viewAction: AnyPublisher<WebScreen.Models.ViewAction, Never> { get }
-  var route: AnyPublisher<WebScreen.Models.ViewRoute, Never> { get }
   
   func process(input: WebScreen.Models.ViewModelInput)
 }
@@ -22,14 +20,14 @@ final class WebScreenViewModel {
   
   // MARK: - Properties
   
-  //    @Injected(container: .shared)
-  //    private var hapticService: HapticFeedbackServiceProtocol
+  var modelArticle: Article
   
   private let viewStateSubj = CurrentValueSubject<WebScreen.Models.ViewState, Never>(.idle)
-  private let viewActionSubj = PassthroughSubject<WebScreen.Models.ViewAction, Never>()
-  private let routeSubj = PassthroughSubject<WebScreen.Models.ViewRoute, Never>()
-  
   private var subscriptions = Set<AnyCancellable>()
+  
+  init(modelArticle: Article) {
+    self.modelArticle = modelArticle
+  }
 }
 
 // MARK: - WebScreenViewModelProtocol
@@ -37,31 +35,19 @@ final class WebScreenViewModel {
 extension WebScreenViewModel: WebScreenViewModelProtocol {
   
   var viewState: AnyPublisher<WebScreen.Models.ViewState, Never> { viewStateSubj.eraseToAnyPublisher() }
-  var viewAction: AnyPublisher<WebScreen.Models.ViewAction, Never> { viewActionSubj.eraseToAnyPublisher() }
-  var route: AnyPublisher<WebScreen.Models.ViewRoute, Never> { routeSubj.eraseToAnyPublisher() }
   
   func process(input: WebScreen.Models.ViewModelInput) {
-    //        input.onLoad.sink { [weak self] _ in
-    //            self?.fetch()
-    //        }.store(in: &subscriptions)
+            input.onLoad.sink { [weak self] _ in
+                self?.fetch()
+            }.store(in: &subscriptions)
   }
 }
 
 // MARK: - Private
 
 private extension WebScreenViewModel {
-  //    func fetch() {
-  //        viewStateSubj.send(.loading)
-  //        service.fetch.sink { [weak self] result in
-  //            guard let self = self else { return }
-  //            switch result {
-  //            case .success([]):
-  //                self.viewStateSubj.send(.empty)
-  //            case let .success(items):
-  //                self.viewStateSubj.send(.loaded(items)
-  //            case let .failure(error):
-  //                self.viewStateSubj.send(.failure(error)
-  //            }
-  //        }.store(in: &subscriptions)
-  //    }
+      func fetch() {
+        let state = WebScreen.Models.State(urlAddress: modelArticle.url)
+        viewStateSubj.send(.loaded(state: state))
+      }
 }

@@ -101,8 +101,13 @@ extension MainScreenViewController: UICollectionViewDelegate {
     default:
       break
     }
-    
-    present(DetailsScreen.Assembly.createModule(with: DetailsScreenViewModel(article: article!)), animated: true, completion: nil)  }
+    guard  let articleForTransmission = article else { return }
+    if articleForTransmission.content != nil {
+      present(DetailsScreen.Assembly.createModule(with: DetailsScreenViewModel(article: articleForTransmission)), animated: true, completion: nil)
+    } else {
+      present(WebScreen.Assembly.createModule(with: WebScreenViewModel(modelArticle: articleForTransmission)), animated: true, completion: nil)
+    }
+  }
 }
 
 // MARK: - Private
