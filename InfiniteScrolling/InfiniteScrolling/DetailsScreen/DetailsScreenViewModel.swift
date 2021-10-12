@@ -19,7 +19,6 @@ protocol DetailsScreenViewModelProtocol: AnyObject {
 final class DetailsScreenViewModel {
   
 // MARK: - Properties
-  
   var article: Article
   private let viewStateSubj = CurrentValueSubject<DetailsScreen.Models.ViewState, Never>(.idle)
   private var subscriptions = Set<AnyCancellable>()
@@ -30,7 +29,6 @@ final class DetailsScreenViewModel {
 }
 
 // MARK: - DetailsScreenViewModelProtocol
-
 extension DetailsScreenViewModel: DetailsScreenViewModelProtocol {
   var viewState: AnyPublisher<DetailsScreen.Models.ViewState, Never> { viewStateSubj.eraseToAnyPublisher() }
   
@@ -42,7 +40,6 @@ extension DetailsScreenViewModel: DetailsScreenViewModelProtocol {
 }
 
 // MARK: - Private
-
 private extension DetailsScreenViewModel {
   func fetch() {
     let titleViewState = TitleView.State(title: article.title, source: article.source?.name, date: article.publishedAt?.mmmm_dd_yyyy())

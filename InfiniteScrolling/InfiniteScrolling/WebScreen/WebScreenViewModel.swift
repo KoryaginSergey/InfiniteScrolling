@@ -18,7 +18,6 @@ protocol WebScreenViewModelProtocol: AnyObject {
 final class WebScreenViewModel {
   
   // MARK: - Properties
-  
   var modelArticle: Article
   
   private let viewStateSubj = CurrentValueSubject<WebScreen.Models.ViewState, Never>(.idle)
@@ -30,7 +29,6 @@ final class WebScreenViewModel {
 }
 
 // MARK: - WebScreenViewModelProtocol
-
 extension WebScreenViewModel: WebScreenViewModelProtocol {
   var viewState: AnyPublisher<WebScreen.Models.ViewState, Never> { viewStateSubj.eraseToAnyPublisher() }
   
@@ -42,7 +40,6 @@ extension WebScreenViewModel: WebScreenViewModelProtocol {
 }
 
 // MARK: - Private
-
 private extension WebScreenViewModel {
   func fetch() {
     let state = WebScreen.Models.State(urlAddress: modelArticle.url)

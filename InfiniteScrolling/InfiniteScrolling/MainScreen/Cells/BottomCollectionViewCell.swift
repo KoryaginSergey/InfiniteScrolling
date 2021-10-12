@@ -22,7 +22,6 @@ final class BottomCollectionViewCell: UICollectionViewCell, NibReusable {
   private var titleView: TitleView?
   
   // MARK: - Properties
-  
   var state: MainScreen.Models.State? {
     didSet {
       configure()
@@ -30,7 +29,6 @@ final class BottomCollectionViewCell: UICollectionViewCell, NibReusable {
   }
   
   // MARK: - Lifecycle
-  
   override func awakeFromNib() {
     super.awakeFromNib()
     setupUI()
@@ -38,7 +36,6 @@ final class BottomCollectionViewCell: UICollectionViewCell, NibReusable {
 }
 
 // MARK: - Private methods
-
 private extension BottomCollectionViewCell {
   func setupUI() {
     bottomCellImageView.layer.cornerRadius = Defaults.BottomImage.cornerRadius

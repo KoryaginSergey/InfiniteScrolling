@@ -21,14 +21,12 @@ final class DetailsScreenViewController: UIViewController, StoryboardBased {
   private var titleView: TitleView?
   
   // MARK: - Properties
-  
   private var viewModel: DetailsScreenViewModelProtocol?
   private let onLoad = PassthroughSubject<Void, Never>()
   
   public var subscriptions = Set<AnyCancellable>()
   
   // MARK: - Lifecycle
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
@@ -38,7 +36,6 @@ final class DetailsScreenViewController: UIViewController, StoryboardBased {
 }
 
 // MARK: - Internal methods
-
 extension DetailsScreenViewController {
   func setDependencies(viewModel: DetailsScreenViewModelProtocol) {
     self.viewModel = viewModel
@@ -46,7 +43,6 @@ extension DetailsScreenViewController {
 }
 
 // MARK: - Bind
-
 private extension DetailsScreenViewController {
   func bind(to viewModel: DetailsScreenViewModelProtocol?) {
     subscriptions.forEach { $0.cancel() }
@@ -77,7 +73,6 @@ private extension DetailsScreenViewController {
 }
 
 // MARK: - Private
-
 private extension DetailsScreenViewController {
   func setup() {
     let titleView = TitleView.loadFromNib()

@@ -15,15 +15,12 @@ final class WebScreenViewController: UIViewController, StoryboardBased {
   
   @IBOutlet private weak var webView: WKWebView!
   
-  
   // MARK: - Properties
-  
   private var viewModel: WebScreenViewModelProtocol?
   private let onLoad = PassthroughSubject<Void, Never>()
   public var subscriptions = Set<AnyCancellable>()
   
   // MARK: - Lifecycle
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     bind(to: viewModel)
@@ -32,7 +29,6 @@ final class WebScreenViewController: UIViewController, StoryboardBased {
 }
 
 // MARK: - Internal methods
-
 extension WebScreenViewController {
   func setDependencies(viewModel: WebScreenViewModelProtocol) {
     self.viewModel = viewModel
@@ -40,7 +36,6 @@ extension WebScreenViewController {
 }
 
 // MARK: - Bind
-
 private extension WebScreenViewController {
   func bind(to viewModel: WebScreenViewModelProtocol?) {
     subscriptions.forEach { $0.cancel() }

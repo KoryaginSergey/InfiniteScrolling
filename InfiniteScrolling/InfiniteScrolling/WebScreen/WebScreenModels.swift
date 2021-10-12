@@ -17,17 +17,14 @@ extension WebScreen {
 }
 
 // MARK: - Models View Input/Output
-
 extension WebScreen.Models {
   
   // MARK: Input
-  
   struct ViewModelInput {
     let onLoad: AnyPublisher<Void, Never>
   }
   
   // MARK: Output
-  
   enum ViewState: Equatable {
     case idle
     case loaded(state: WebScreen.Models.State)
@@ -35,7 +32,6 @@ extension WebScreen.Models {
 }
 
 // MARK: - Scene Models
-
 extension WebScreen.Models {
   struct State {
     let urlAddress: URL?

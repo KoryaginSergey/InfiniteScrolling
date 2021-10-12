@@ -13,7 +13,6 @@ import Combine
 final class MainScreenViewController: UIViewController, StoryboardBased {
   
   // MARK: - Properties
-  
   @IBOutlet private weak var collectionView: UICollectionView!
   @IBOutlet private weak var titleLabel: UILabel!
   
@@ -23,7 +22,6 @@ final class MainScreenViewController: UIViewController, StoryboardBased {
   public var subscriptions = Set<AnyCancellable>()
   
   // MARK: - Lifecycle
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     bind(to: viewModel)
@@ -33,7 +31,6 @@ final class MainScreenViewController: UIViewController, StoryboardBased {
 }
 
 // MARK: - Internal methods
-
 extension MainScreenViewController {
   func setDependencies(viewModel: MainScreenViewModelProtocol) {
     self.viewModel = viewModel
@@ -41,7 +38,6 @@ extension MainScreenViewController {
 }
 
 // MARK: - Bind
-
 private extension MainScreenViewController {
   func bind(to viewModel: MainScreenViewModelProtocol?) {
     subscriptions.forEach { $0.cancel() }
@@ -67,7 +63,6 @@ private extension MainScreenViewController {
 }
 
 // MARK: - DataSource
-
 private extension MainScreenViewController {
   func updateSnapshot(_ sections: [MainScreen.Models.Section], animated: Bool = true) {
     dataSource.updateSnapshot(sections, animated: animated)
@@ -75,7 +70,6 @@ private extension MainScreenViewController {
 }
 
 // MARK: - Delegate
-
 extension MainScreenViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
     viewModel?.retrieveNewData(at: indexPath)

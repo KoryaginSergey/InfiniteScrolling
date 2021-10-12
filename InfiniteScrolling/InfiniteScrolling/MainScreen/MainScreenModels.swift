@@ -18,17 +18,14 @@ extension MainScreen {
 }
 
 // MARK: - Models View Input/Output
-
 extension MainScreen.Models {
   
   // MARK: Input
-  
   struct ViewModelInput {
     let onLoad: AnyPublisher<Void, Never>
   }
   
   // MARK: Output
-  
   enum ViewState: Equatable {
     case idle
     case loaded(sections: [MainScreen.Models.Section])
@@ -36,7 +33,6 @@ extension MainScreen.Models {
 }
 
 // MARK: - Scene Models
-
 extension MainScreen.Models {
   struct State {
     let id = UUID().hashValue

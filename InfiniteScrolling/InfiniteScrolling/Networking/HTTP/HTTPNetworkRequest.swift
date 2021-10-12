@@ -17,7 +17,7 @@ let defaultParams: HTTPParameters = ["apiKey" : "cda59155c15044a5adadfb5c96323db
 
 struct HTTPNetworkRequest {
   
-  /// Set the body, method, headers, and paramaters of the request
+  /// Set the body, method, headers, and parameters of the request
   static func configureHTTPRequest(with parameters: HTTPParameters, includes headers: HTTPHeaders, contains body: Data?, and method: HTTPMethod, endpoint: String) throws -> URLRequest {
     
     guard let url = URL(string: "https://newsapi.org/v2\(endpoint)") else { throw HTTPNetworkError.missingURL}

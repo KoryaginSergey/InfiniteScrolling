@@ -14,12 +14,10 @@ final class MainScreenDataSource {
   private typealias Snapshot = NSDiffableDataSourceSnapshot<MainScreen.Models.Section, MainScreen.Models.Item>
   
   // MARK: - Properties
-  
   private let collectionView: UICollectionView
   private lazy var dataSource = makeDataSource()
   
   // MARK: - Initializators
-  
   init(collectionView: UICollectionView) {
     self.collectionView = collectionView
     registerReusable(in: collectionView)
@@ -32,7 +30,6 @@ final class MainScreenDataSource {
   }
   
   // MARK: - Interface
-  
   func updateSnapshot(_ sections: [MainScreen.Models.Section], animated: Bool = true) {
     var snapshot = Snapshot()
     snapshot.appendSections(sections)
@@ -44,7 +41,6 @@ final class MainScreenDataSource {
 }
 
 // MARK: - Private
-
 private extension MainScreenDataSource {
   func registerReusable(in collectionView: UICollectionView) {
     collectionView.register(cellType: TopCollectionViewCell.self)
@@ -53,7 +49,6 @@ private extension MainScreenDataSource {
 }
 
 // MARK: - DataSource
-
 private extension MainScreenDataSource {
   func makeDataSource() -> DataSource {
     DataSource(collectionView: collectionView) { collectionView, indexPath, item -> UICollectionViewCell? in
@@ -72,7 +67,6 @@ private extension MainScreenDataSource {
 }
 
 // MARK: - Layout
-
 private extension MainScreenDataSource {
   func makeLayout() -> UICollectionViewCompositionalLayout {
     return UICollectionViewCompositionalLayout { [weak self] index, _ -> NSCollectionLayoutSection? in

@@ -27,7 +27,6 @@ final class TitleView: UIView, NibLoadable {
   }
   
   // MARK: - Properties
-  
   public var state: State? {
     didSet {
       configure()
@@ -35,7 +34,6 @@ final class TitleView: UIView, NibLoadable {
   }
   
   // MARK: - Lifecycle
-  
   override func awakeFromNib() {
     super.awakeFromNib()
     setupUI()
@@ -43,7 +41,6 @@ final class TitleView: UIView, NibLoadable {
 }
 
 // MARK: - Private methods
-
 private extension TitleView {
   func setupUI() {
     sourceLabel.textColor = .systemBlue
@@ -57,7 +54,6 @@ private extension TitleView {
 }
 
 // MARK: - TitleView.State + Hashable
-
 extension TitleView.State: Hashable {
   static func == (lhs: TitleView.State, rhs: TitleView.State) -> Bool {
     return lhs.title == rhs.title && lhs.source == rhs.source && lhs.date == rhs.date

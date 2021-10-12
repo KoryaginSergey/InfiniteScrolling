@@ -24,7 +24,6 @@ protocol MainScreenViewModelProtocol: AnyObject {
 final class MainScreenViewModel {
   
   // MARK: - Properties
-  
   private let viewStateSubj = CurrentValueSubject<MainScreen.Models.ViewState, Never>(.idle)
   private var subscriptions = Set<AnyCancellable>()
   
@@ -39,7 +38,6 @@ final class MainScreenViewModel {
 }
 
 // MARK: - MainScreenViewModelProtocol
-
 extension MainScreenViewModel: MainScreenViewModelProtocol {
   var viewState: AnyPublisher<MainScreen.Models.ViewState, Never> { viewStateSubj.eraseToAnyPublisher() }
   
@@ -77,7 +75,6 @@ extension MainScreenViewModel {
 }
 
 // MARK: - Private
-
 private extension MainScreenViewModel {
   func fetch() {
     let group = DispatchGroup()

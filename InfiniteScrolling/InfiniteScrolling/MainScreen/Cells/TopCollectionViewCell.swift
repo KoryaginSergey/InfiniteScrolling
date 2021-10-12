@@ -26,7 +26,6 @@ final class TopCollectionViewCell: UICollectionViewCell, NibReusable {
   private var titleView: TitleView?
   
   // MARK: - Properties
-  
   var state: MainScreen.Models.State? {
     didSet {
       configure()
@@ -34,7 +33,6 @@ final class TopCollectionViewCell: UICollectionViewCell, NibReusable {
   }
   
   // MARK: - Lifecycle
-  
   override func awakeFromNib() {
     super.awakeFromNib()
     setupUI()
@@ -42,7 +40,6 @@ final class TopCollectionViewCell: UICollectionViewCell, NibReusable {
 }
 
 // MARK: - Private methods
-
 private extension TopCollectionViewCell {
   func setupUI() {
     topCellView.layer.cornerRadius = Defaults.TopView.cornerRadius

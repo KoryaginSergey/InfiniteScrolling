@@ -18,17 +18,14 @@ extension DetailsScreen {
 }
 
 // MARK: - Models View Input/Output
-
 extension DetailsScreen.Models {
   
   // MARK: Input
-  
   struct ViewModelInput {
     let onLoad: AnyPublisher<Void, Never>
   }
   
   // MARK: Output
-  
   enum ViewState: Equatable {
     case idle
     case loaded(state: DetailsScreen.Models.State)
@@ -36,9 +33,7 @@ extension DetailsScreen.Models {
 }
 
 // MARK: - Scene Models
-
 extension DetailsScreen.Models {
-
   struct State {
     let id = UUID().hashValue
     let titleViewState: TitleView.State
