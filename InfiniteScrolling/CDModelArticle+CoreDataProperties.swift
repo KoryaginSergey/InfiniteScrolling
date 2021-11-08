@@ -16,6 +16,7 @@ extension CDModelArticle {
         return NSFetchRequest<CDModelArticle>(entityName: "CDModelArticle")
     }
 
+    @NSManaged public var id: Int16
     @NSManaged public var nameSource: String?
     @NSManaged public var title: String?
     @NSManaged public var urlArticle: URL?
@@ -26,6 +27,17 @@ extension CDModelArticle {
 }
 
 extension CDModelArticle : Identifiable {
+  
+  convenience init(article: Article, id: Int16) {
+    self.init()
+    self.nameSource = article.source?.name
+    self.title = article.title
+    self.urlArticle = article.url
+    self.urlToImage = article.urlToImage
+    self.publishedAt = article.publishedAt
+    self.content = article.content
+    self.id = id
+  }
   
   
 //  static func getCity(by name: String?) -> CDCityModel? {

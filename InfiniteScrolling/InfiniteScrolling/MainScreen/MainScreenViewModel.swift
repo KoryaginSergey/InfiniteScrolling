@@ -109,8 +109,10 @@ private extension MainScreenViewModel {
       switch result {
       case let .success(data):
         guard let articles = data.articles else { return }
-        self.topItems += articles
-        self.reloadData()
+        
+        
+//        self.topItems += articles
+//        self.reloadData()
         self.topPage.page = self.topPage.page + 1
         self.topPage.isFull = data.totalResults == self.topItems.count
       case let .failure(error):
@@ -126,8 +128,8 @@ private extension MainScreenViewModel {
       switch result {
       case let .success(data):
         guard let articles = data.articles else { return }
-        self.bottomItems += articles
-        self.reloadData()
+//        self.bottomItems += articles
+//        self.reloadData()
         self.bottomPage.page = self.bottomPage.page + 1
         self.bottomPage.isFull = data.totalResults == self.bottomItems.count
       case let .failure(error):
@@ -137,5 +139,7 @@ private extension MainScreenViewModel {
     }
   }
 }
+
+extension Array 
 
 
