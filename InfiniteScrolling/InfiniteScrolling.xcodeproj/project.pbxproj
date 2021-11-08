@@ -20,6 +20,10 @@
 		6337A0522710907500DCCB67 /* WebScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6337A04D2710907500DCCB67 /* WebScreenViewController.swift */; };
 		6337A0532710907500DCCB67 /* WebScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6337A04E2710907500DCCB67 /* WebScreenAssembly.swift */; };
 		6337A0542710907500DCCB67 /* WebScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6337A04F2710907500DCCB67 /* WebScreenViewModel.swift */; };
+		633DA2B627394CE500C25215 /* DataBase.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 633DA2B427394CE500C25215 /* DataBase.xcdatamodeld */; };
+		633DA2BA2739811400C25215 /* CDModelArticle+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633DA2B82739811400C25215 /* CDModelArticle+CoreDataClass.swift */; };
+		633DA2BB2739811400C25215 /* CDModelArticle+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633DA2B92739811400C25215 /* CDModelArticle+CoreDataProperties.swift */; };
+		633DA2BE2739823E00C25215 /* DataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633DA2BD2739823E00C25215 /* DataModels.swift */; };
 		635B35B0270DC53E003109A1 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635B35AF270DC53E003109A1 /* String+Extensions.swift */; };
 		635B35BF270DE5AA003109A1 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 635B35BE270DE5AA003109A1 /* SDWebImage */; };
 		6378A9C92701F85F00D60AE7 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6378A9C82701F85F00D60AE7 /* HTTPMethod.swift */; };
@@ -66,6 +70,10 @@
 		6337A04D2710907500DCCB67 /* WebScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebScreenViewController.swift; sourceTree = "<group>"; };
 		6337A04E2710907500DCCB67 /* WebScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebScreenAssembly.swift; sourceTree = "<group>"; };
 		6337A04F2710907500DCCB67 /* WebScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebScreenViewModel.swift; sourceTree = "<group>"; };
+		633DA2B527394CE500C25215 /* DataBase.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataBase.xcdatamodel; sourceTree = "<group>"; };
+		633DA2B82739811400C25215 /* CDModelArticle+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDModelArticle+CoreDataClass.swift"; sourceTree = "<group>"; };
+		633DA2B92739811400C25215 /* CDModelArticle+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDModelArticle+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		633DA2BD2739823E00C25215 /* DataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModels.swift; sourceTree = "<group>"; };
 		635B35AF270DC53E003109A1 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		6378A9C82701F85F00D60AE7 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		6378A9CC2701F95B00D60AE7 /* HTTPNetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPNetworkError.swift; sourceTree = "<group>"; };
@@ -144,6 +152,15 @@
 			path = WebScreen;
 			sourceTree = "<group>";
 		};
+		633DA2B327394C8300C25215 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				633DA2B427394CE500C25215 /* DataBase.xcdatamodeld */,
+				633DA2BD2739823E00C25215 /* DataModels.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		635B35AE270DC32F003109A1 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +200,8 @@
 		63C2688D26F9DDB400B826E7 = {
 			isa = PBXGroup;
 			children = (
+				633DA2B82739811400C25215 /* CDModelArticle+CoreDataClass.swift */,
+				633DA2B92739811400C25215 /* CDModelArticle+CoreDataProperties.swift */,
 				63C2689826F9DDB400B826E7 /* InfiniteScrolling */,
 				63C2689726F9DDB400B826E7 /* Products */,
 			);
@@ -199,6 +218,7 @@
 		63C2689826F9DDB400B826E7 /* InfiniteScrolling */ = {
 			isa = PBXGroup;
 			children = (
+				633DA2B327394C8300C25215 /* CoreData */,
 				63C268D026F9EDBB00B826E7 /* CommonFiles */,
 				63C2689926F9DDB400B826E7 /* AppDelegate.swift */,
 				63C2689B26F9DDB400B826E7 /* SceneDelegate.swift */,
@@ -372,6 +392,7 @@
 			files = (
 				63C268DE26F9EE0D00B826E7 /* Reusable.swift in Sources */,
 				635B35B0270DC53E003109A1 /* String+Extensions.swift in Sources */,
+				633DA2BB2739811400C25215 /* CDModelArticle+CoreDataProperties.swift in Sources */,
 				63C268C726F9E12500B826E7 /* MainScreenAssembly.swift in Sources */,
 				63C268DF26F9EE0D00B826E7 /* UITableView+Reusable.swift in Sources */,
 				6336152C26FDB0F2006B3688 /* ModelArticle.swift in Sources */,
@@ -387,13 +408,16 @@
 				63C268EF26F9FCCC00B826E7 /* BottomCollectionViewCell.swift in Sources */,
 				63C268DB26F9EE0D00B826E7 /* StoryboardSceneBased.swift in Sources */,
 				6378A9CD2701F95B00D60AE7 /* HTTPNetworkError.swift in Sources */,
+				633DA2B627394CE500C25215 /* DataBase.xcdatamodeld in Sources */,
 				63C268C326F9E12500B826E7 /* MainScreenDataSource.swift in Sources */,
 				63C2689A26F9DDB400B826E7 /* AppDelegate.swift in Sources */,
 				6337A0512710907500DCCB67 /* WebScreenModels.swift in Sources */,
+				633DA2BA2739811400C25215 /* CDModelArticle+CoreDataClass.swift in Sources */,
 				6336152126FC76E1006B3688 /* DetailsScreenViewModel.swift in Sources */,
 				63C2689C26F9DDB400B826E7 /* SceneDelegate.swift in Sources */,
 				63C268E026F9EE0D00B826E7 /* NibLoadable.swift in Sources */,
 				63C268C826F9E12500B826E7 /* MainScreenViewModel.swift in Sources */,
+				633DA2BE2739823E00C25215 /* DataModels.swift in Sources */,
 				6378A9DD2702018C00D60AE7 /* PostServices.swift in Sources */,
 				6336151026FC5EFF006B3688 /* TitleView.swift in Sources */,
 				63C268C526F9E12500B826E7 /* MainScreenModels.swift in Sources */,
@@ -614,6 +638,19 @@
 			productName = SDWebImage;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		633DA2B427394CE500C25215 /* DataBase.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				633DA2B527394CE500C25215 /* DataBase.xcdatamodel */,
+			);
+			currentVersion = 633DA2B527394CE500C25215 /* DataBase.xcdatamodel */;
+			path = DataBase.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 63C2688E26F9DDB400B826E7 /* Project object */;
 }
