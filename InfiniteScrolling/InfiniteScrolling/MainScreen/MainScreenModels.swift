@@ -35,7 +35,7 @@ extension MainScreen.Models {
 // MARK: - Scene Models
 extension MainScreen.Models {
   struct State {
-    let id = UUID().hashValue
+    let id: Int16
     let titleViewState: TitleView.State?
     let imageURL: URL?
   }

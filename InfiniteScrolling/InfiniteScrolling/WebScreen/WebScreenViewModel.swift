@@ -18,12 +18,12 @@ protocol WebScreenViewModelProtocol: AnyObject {
 final class WebScreenViewModel {
   
   // MARK: - Properties
-  var modelArticle: Article
+  var modelArticle: CDModelArticle
   
   private let viewStateSubj = CurrentValueSubject<WebScreen.Models.ViewState, Never>(.idle)
   private var subscriptions = Set<AnyCancellable>()
   
-  init(modelArticle: Article) {
+  init(modelArticle: CDModelArticle) {
     self.modelArticle = modelArticle
   }
 }
@@ -42,7 +42,7 @@ extension WebScreenViewModel: WebScreenViewModelProtocol {
 // MARK: - Private
 private extension WebScreenViewModel {
   func fetch() {
-    let state = WebScreen.Models.State(urlAddress: modelArticle.url)
+    let state = WebScreen.Models.State(urlAddress: modelArticle.urlArticle)
     viewStateSubj.send(.loaded(state: state))
   }
 }

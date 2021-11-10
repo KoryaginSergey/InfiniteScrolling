@@ -9,19 +9,17 @@
 import Foundation
 import Combine
 import UIKit
+import CoreData
 
 
 protocol MainScreenViewModelProtocol: AnyObject {
   var viewState: AnyPublisher<MainScreen.Models.ViewState, Never> { get }
   
-  var topItems:[Article] { get }
-  var bottomItems:[Article] { get }
-  
   func process(input: MainScreen.Models.ViewModelInput)
   func retrieveNewData(at indexPath: IndexPath)
 }
 
-final class MainScreenViewModel {
+final class MainScreenViewModel: NSObject{
   
   // MARK: - Properties
   private let viewStateSubj = CurrentValueSubject<MainScreen.Models.ViewState, Never>(.idle)
@@ -32,9 +30,6 @@ final class MainScreenViewModel {
   
   var isTopLoading: Bool = false
   var isBottomLoading: Bool = false
-  
-  var topItems:[Article] = []
-  var bottomItems:[Article] = []
 }
 
 // MARK: - MainScreenViewModelProtocol
@@ -53,21 +48,17 @@ extension MainScreenViewModel {
     switch indexPath.section {
     case 0:
       if isTopLoading { return }
-      if indexPath.row == self.topItems.count - 1 {
-        if self.topPage.isFull { return }
-        self.isTopLoading = true
-        self.fetchTopItems { [weak self] in
-          self?.isTopLoading = false
-        }
+      if self.topPage.isFull { return }
+      self.isTopLoading = true
+      self.fetchTopItems { [weak self] in
+        self?.isTopLoading = false
       }
     case 1:
       if isBottomLoading { return }
-      if indexPath.row == self.bottomItems.count - 1 {
-        if self.bottomPage.isFull { return }
-        self.isBottomLoading = true
-        self.fetchBottomItems { [weak self] in
-          self?.isBottomLoading = false
-        }
+      if self.bottomPage.isFull { return }
+      self.isBottomLoading = true
+      self.fetchBottomItems { [weak self] in
+        self?.isBottomLoading = false
       }
     default: break
     }
@@ -93,14 +84,6 @@ private extension MainScreenViewModel {
   }
   
   func reloadData() {
-    let itemsTop = self.topItems.map({ (article) -> MainScreen.Models.Item in
-      return .topItem(state: .init(titleViewState: .init(title: article.title, source: article.source?.name, date: article.publishedAt?.mmm_dd_yyyy()), imageURL: article.urlToImage))
-    })
-    let itemsBottom = self.bottomItems.map({ (article) -> MainScreen.Models.Item in
-      return .bottomItem(state: .init(titleViewState: .init(title: article.title, source: article.source?.name, date: article.publishedAt?.mmm_dd_yyyy()), imageURL: article.urlToImage))
-    })
-    self.viewStateSubj.send(.loaded(sections: [.init(id: 0, items: itemsTop),
-                                               .init(id: 1, items: itemsBottom) ]))
   }
   
   func fetchTopItems(closure: (()->Void)?) {
@@ -109,12 +92,8 @@ private extension MainScreenViewModel {
       switch result {
       case let .success(data):
         guard let articles = data.articles else { return }
-        
-        
-//        self.topItems += articles
-//        self.reloadData()
+        articles.saveModels(pageObject: self.bottomPage, type: .top)
         self.topPage.page = self.topPage.page + 1
-        self.topPage.isFull = data.totalResults == self.topItems.count
       case let .failure(error):
         print(error)
       }
@@ -128,10 +107,8 @@ private extension MainScreenViewModel {
       switch result {
       case let .success(data):
         guard let articles = data.articles else { return }
-//        self.bottomItems += articles
-//        self.reloadData()
+        articles.saveModels(pageObject: self.bottomPage, type: .bottom)
         self.bottomPage.page = self.bottomPage.page + 1
-        self.bottomPage.isFull = data.totalResults == self.bottomItems.count
       case let .failure(error):
         print(error)
       }
@@ -140,6 +117,17 @@ private extension MainScreenViewModel {
   }
 }
 
-extension Array 
+private extension Array where Element == Article {
+  
+  func saveModels(pageObject: Page, type: CDModelArticle.ArticleType) {
+    let maxIndex = pageObject.page * pageObject.size
+    let minIndex = maxIndex - pageObject.size
+    for (index, element) in self.enumerated() {
+      let id = minIndex + index
+      CDModelArticle.store(by: Int16(id), type: type, object: element)
+    }
+    DataModels.sharedInstance.saveContext()
+  }
+}
 
 

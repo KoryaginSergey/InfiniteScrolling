@@ -19,11 +19,11 @@ protocol DetailsScreenViewModelProtocol: AnyObject {
 final class DetailsScreenViewModel {
   
 // MARK: - Properties
-  var article: Article
+  var article: CDModelArticle
   private let viewStateSubj = CurrentValueSubject<DetailsScreen.Models.ViewState, Never>(.idle)
   private var subscriptions = Set<AnyCancellable>()
   
-  init(article: Article) {
+  init(article: CDModelArticle) {
     self.article = article
   }
 }
@@ -42,7 +42,7 @@ extension DetailsScreenViewModel: DetailsScreenViewModelProtocol {
 // MARK: - Private
 private extension DetailsScreenViewModel {
   func fetch() {
-    let titleViewState = TitleView.State(title: article.title, source: article.source?.name, date: article.publishedAt?.mmmm_dd_yyyy())
+    let titleViewState = TitleView.State(title: article.title, source: article.nameSource, date: article.publishedAt?.mmmm_dd_yyyy())
     let state = DetailsScreen.Models.State(titleViewState: titleViewState, imageURL: article.urlToImage, content: article.content)
     self.viewStateSubj.send(.loaded(state: state))
   }

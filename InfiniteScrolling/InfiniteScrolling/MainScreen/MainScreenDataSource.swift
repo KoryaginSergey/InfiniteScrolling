@@ -10,8 +10,8 @@ import UIKit
 
 
 final class MainScreenDataSource {
-  fileprivate typealias DataSource = UICollectionViewDiffableDataSource<MainScreen.Models.Section, MainScreen.Models.Item>
-  private typealias Snapshot = NSDiffableDataSourceSnapshot<MainScreen.Models.Section, MainScreen.Models.Item>
+  fileprivate typealias DataSource = UICollectionViewDiffableDataSource<String, MainScreen.Models.Item>
+  typealias Snapshot = NSDiffableDataSourceSnapshot<String, MainScreen.Models.Item>
   
   // MARK: - Properties
   private let collectionView: UICollectionView
@@ -30,12 +30,7 @@ final class MainScreenDataSource {
   }
   
   // MARK: - Interface
-  func updateSnapshot(_ sections: [MainScreen.Models.Section], animated: Bool = true) {
-    var snapshot = Snapshot()
-    snapshot.appendSections(sections)
-    sections.forEach {
-      snapshot.appendItems($0.items, toSection: $0)
-    }
+  func updateSnapshot(_ snapshot: Snapshot, animated: Bool = true) {
     dataSource.apply(snapshot, animatingDifferences: false)
   }
 }
