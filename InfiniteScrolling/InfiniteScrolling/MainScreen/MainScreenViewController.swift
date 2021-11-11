@@ -22,7 +22,7 @@ final class MainScreenViewController: UIViewController, StoryboardBased {
   private let onLoad = PassthroughSubject<Void, Never>()
   public var subscriptions = Set<AnyCancellable>()
   
-  var fetchedResultsController: NSFetchedResultsController<CDModelArticle> = {
+  let fetchedResultsController: NSFetchedResultsController<CDModelArticle> = {
     let request: NSFetchRequest<CDModelArticle> = CDModelArticle.fetchRequest()
     request.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
     let controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: DataModels.sharedInstance.context, sectionNameKeyPath: "type", cacheName: nil)

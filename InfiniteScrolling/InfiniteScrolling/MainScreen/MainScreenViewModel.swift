@@ -68,22 +68,8 @@ extension MainScreenViewModel {
 // MARK: - Private
 private extension MainScreenViewModel {
   func fetch() {
-    let group = DispatchGroup()
-    group.enter()
-    self.fetchTopItems {
-      group.leave()
-    }
-    group.enter()
-    self.fetchBottomItems {
-      group.leave()
-    }
-    
-    group.notify(queue: DispatchQueue.main) { [weak self] in
-      self?.reloadData()
-    }
-  }
-  
-  func reloadData() {
+    fetchTopItems(closure: nil)
+    fetchBottomItems(closure: nil)
   }
   
   func fetchTopItems(closure: (()->Void)?) {
@@ -118,7 +104,6 @@ private extension MainScreenViewModel {
 }
 
 private extension Array where Element == Article {
-  
   func saveModels(pageObject: Page, type: CDModelArticle.ArticleType) {
     let maxIndex = pageObject.page * pageObject.size
     let minIndex = maxIndex - pageObject.size
