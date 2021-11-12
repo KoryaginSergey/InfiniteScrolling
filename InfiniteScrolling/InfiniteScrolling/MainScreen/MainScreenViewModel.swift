@@ -25,8 +25,8 @@ final class MainScreenViewModel: NSObject{
   private let viewStateSubj = CurrentValueSubject<MainScreen.Models.ViewState, Never>(.idle)
   private var subscriptions = Set<AnyCancellable>()
   
-  var topPage = Page(size: 10, page: 1)
-  var bottomPage = Page(size: 10, page: 1)
+  var topPage = Page(size: 5, page: 1)
+  var bottomPage = Page(size: 5, page: 1)
   
   var isTopLoading: Bool = false
   var isBottomLoading: Bool = false
@@ -78,7 +78,7 @@ private extension MainScreenViewModel {
       switch result {
       case let .success(data):
         guard let articles = data.articles else { return }
-        articles.saveModels(pageObject: self.bottomPage, type: .top)
+        articles.saveModels(pageObject: self.topPage, type: .top)
         self.topPage.page = self.topPage.page + 1
       case let .failure(error):
         print(error)

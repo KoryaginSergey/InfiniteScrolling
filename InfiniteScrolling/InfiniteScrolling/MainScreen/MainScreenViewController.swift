@@ -72,7 +72,7 @@ private extension MainScreenViewController {
     switch state {
     case .idle:
       break
-    case .loaded(sections: let section):
+    case .loaded(sections: _):
       break
     }
   }
@@ -119,6 +119,8 @@ extension MainScreenViewController: NSFetchedResultsControllerDelegate {
           return .bottomItem(state: .init(id: article.id, titleViewState: .init(title: article.title, source: article.nameSource, date: article.publishedAt?.mmm_dd_yyyy()), imageURL: article.urlToImage))
         }
       mySnapshot.appendItems(itemIdentifiers, toSection: section)
+    }
+    if mySnapshot.sectionIdentifiers.count == 2 {
       self.dataSource.updateSnapshot(mySnapshot)
     }
   }
